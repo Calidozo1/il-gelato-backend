@@ -1,10 +1,10 @@
+/* Estilos generales */
 * {
     font-family: "Montserrat", sans-serif;
     font-optical-sizing: auto;
     font-weight: 400;
     font-style: normal;
 }
-
  .material-symbols-outlined {
      font-variation-settings:
              'FILL' 0,
@@ -17,6 +17,19 @@ img{
     object-fit: cover;
 }
 
+/* Clase para ocultar elementos */
+.oculto {
+  display: none !important;
+}
+
+
+
+
+
+/*--- Admin ---*/
+
+/*--- Cliente ---*/
+/* Consultar y agregar al carrito*/
 .cart-aside {
     position: fixed;
     top: 0;

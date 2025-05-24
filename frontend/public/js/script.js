@@ -24,6 +24,31 @@ productos.forEach(producto => {
     listaProductos.appendChild(div);
 });
 
+// Cambio de Ventanas
+function mostrarCliente() {
+  document.getElementById('seccionCliente').classList.remove('oculto');
+  document.getElementById('seccionAdmin').classList.add('oculto');
+}
+function mostrarAdministrador() {
+  document.getElementById('seccionCliente').classList.add('oculto');
+  document.getElementById('seccionAdmin').classList.remove('oculto');
+}
+
+// Configura los botones para alternar las vistas
+document.addEventListener('DOMContentLoaded', function() {
+  document.getElementById('mostrarClienteBtn').addEventListener('click', mostrarCliente);
+  document.getElementById('mostrarAdminBtn').addEventListener('click', mostrarAdministrador);
+});
+document.addEventListener('DOMContentLoaded', function() {
+  document.getElementById('mostrarClienteBtn').addEventListener('click', mostrarCliente);
+  document.getElementById('mostrarAdminBtn').addEventListener('click', mostrarAdministrador);
+});
+
+
+
+
+//                     Usuario
+
 document.getElementById("toggleCart").addEventListener("click", () => {
     cartAside.classList.toggle("active");
 });
@@ -109,3 +134,5 @@ document.getElementById("emptyCart").addEventListener("click", () => {
 
 // Cargar carrito inicial
 renderizarCarrito();
+
+
