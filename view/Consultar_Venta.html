@@ -1,10 +1,43 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Consultar ventas</title>
+    <link rel="stylesheet" href= "view/consultarVenta.css">
+    <link rel="stylesheet" href="consultarVenta.css">
+    <link rel="stylesheet" href="">
 </head>
 <body>
+<main>
+    <div class="contenedor">
+        <div>
+            <p>imagen helado</p>
+        </div>
+    </div>
+    <div class="contenedor">
+        <p> Consultar Ventas</p>
+    </div>
 
+    <form class="filtro">
+        <input type="text" placeholder="Buscar cliente orden">
+        <input type="text" placeholder="Numero de orden ">
+        <input type="date">
+        <button type="submit" > Filtrar </button>
+    </form>
+
+    <div class="table">
+        <table>
+            <thead>
+            <tr>
+                <th> Cliente </th>
+                <th> N Orden </th>
+                <th> Fecha y hora </th>
+                <th> Precio </th>
+                <th> Estado </th>
+            </tr>
+            </thead>
+        </table>
+    </div>
+</main>
 </body>
 </html>
