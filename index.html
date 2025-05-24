@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital@0;1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <title>Document</title>
+</head>
+
+<body>
+  <header id="header">
+    <div class="contenedor-header">
+      <nav class="navigation">
+          <p class="logotipo">🍦 Il Gelatto <span>Della Nonna</span></p>
+      </nav>
+    </div>
+  </header>
+
+  <section class="banner">
+    <div class="banner-container">
+      <div class="banner-item">
+        <h3>Helados Artesanales, Sabores Únicos</h3>
+      </div>
+      <div class="banner-item">
+        <h3>Postres Deliciosos con Tradición Italiana</h3>
+      </div>
+      <div class="banner-item">
+        <h3>Calidad y Pasión en Cada Bocado</h3>
+      </div>
+    </div>
+  </section>
+
+  <button id="toggleCart">🛒 Carrito</button>
+
+  <aside id="cartAside" class="cart-aside">
+    <div class="cart-header">
+      <h2>Tu Carrito</h2>
+      <button id="closeCart">&times;</button>
+    </div>
+    <div class="cart-content">
+      <table>
+        <tbody id="cartItems"></tbody>
+      </table>
+      <h3>Total: <span id="cartTotal">$0</span></h3>
+      <button id="emptyCart">Vaciar Carrito</button>
+    </div>
+  </aside>
+
+
+  <main>
+    <div id="contenedor">
+      <div id="listaProductos">
+      </div>
+    </div>
+  </main>
+
+
+  <footer>
+    <div class="footer">
+      <p>&copy;2024 il Gelatto Della Nonna. All rights reserved</p>
+    </div>
+  </footer>
+
+  <script src="/assets/js/index.js"></script>
+</body>
+</html>
+
