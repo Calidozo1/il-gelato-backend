@@ -3,6 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <title>Consultar ventas</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Berkshire+Swash&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="consultarVenta.css">
 </head>
 <body>
@@ -15,8 +21,8 @@
 </header>
 <main>
     <div class="contenedor">
-        <img src="">
-        <p> Consultar Ventas</p>
+        <H1> Consultar Ventas</H1>
+        <img src="/view/imagen/Gradient.png">
     </div>
 
     <form class="filtro">
@@ -26,8 +32,8 @@
         <button type="submit" > Filtrar </button>
     </form>
 
-    <div class="table">
-        <table>
+    <section class="table">
+        <table class = content-table>
             <thead>
             <tr>
                 <th> Cliente </th>
@@ -37,8 +43,18 @@
                 <th> Estado </th>
             </tr>
             </thead>
+            <tbody>
+                <tr>
+                    <td>Pedro Romero</td>
+                    <th>AA001</th>
+                    <th>12/11/2020</th>
+                    <th>12$</th>
+                    <th>Pendiente</th>
+                </tr>
+
+            </tbody>
         </table>
-    </div>
+    </section>
 </main>
 </body>
 </html>

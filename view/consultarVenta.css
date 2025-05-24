@@ -1,3 +1,39 @@
 body{
     background: white;
 }
+.body {
+    font-family: "Berkshire Swash", serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+h1{
+    font-family: "Berkshire Swash", serif;
+    text-align: center;
+}
+
+table {
+    width: 100%;
+    table-layout: auto;
+}
+.content-table{
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9em;
+    min-width: 400px;
+}
+.content-table thead th{
+    background: mediumpurple;
+    color: white;
+    text-align: left;
+    font-weight: bold;
+}
+
+.content-table th,
+.content-table td {
+    padding: 10px 15px;
+}
+
+.content-table tbody tr {
+    border-bottom: 1px solid white;
+}
