@@ -1,7 +1,7 @@
 const productos = [
-    { id: 1, nombre: "Gelato de Pistacho", precio: 5, imagen: "/assets/img/icecream.png" },
-    { id: 2, nombre: "Gelato de Chocolate", precio: 4.5, imagen: "/assets/img/food.png" },
-    { id: 3, nombre: "Gelato de Fresa", precio: 4, imagen: "/assets/img/food.png" }
+    { id: 1, nombre: "Gelato de Pistacho", precio: 5, imagen: "/img/icecream.png" },
+    { id: 2, nombre: "Gelato de Chocolate", precio: 4.5, imagen: "/img/icecream.png" },
+    { id: 3, nombre: "Gelato de Fresa", precio: 4, imagen: "/img/food.png" }
 ];
 
 let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
@@ -9,6 +9,7 @@ const listaProductos = document.getElementById("listaProductos");
 const cartAside = document.getElementById("cartAside");
 const cartItems = document.getElementById("cartItems");
 const cartTotal = document.getElementById("cartTotal");
+const cartCount = document.getElementById("cartCount");
 
 // Renderizar productos en la tienda
 productos.forEach(producto => {
@@ -34,19 +35,26 @@ document.getElementById("closeCart").addEventListener("click", () => {
 // Renderizar productos del carrito
 function renderizarCarrito() {
     cartItems.innerHTML = "";
-    carrito = carrito.filter(producto => producto.cantidad > 0); // Eliminar productos con cantidad 0
+    cartCount.innerText = "0";
     carrito.forEach((producto, index) => {
-        const fila = document.createElement("tr");
+        const fila = document.createElement("div");
+        fila.classList.add("fila");
         fila.innerHTML = `
-                <td><img src="${producto.imagen}" alt="${producto.nombre}" width="50"></td>
-                <td>${producto.nombre}</td>
-                <td>$${producto.precio.toFixed(2)}</td>
-                <td><input type="number" min="1" value="${producto.cantidad}" onchange="actualizarCantidad(${index}, this.value)"></td>
-                <td><button onclick="eliminarDelCarrito(${index})">❌ Eliminar</button></td>
+                <div><img src="${producto.imagen}" alt="${producto.nombre}" width="50"></div>
+                <div>${producto.nombre}</div>
+                <div>$${producto.precio.toFixed(2)}</div>
+                <div class="cont-cant">
+                    <input class="counter-cantidad" type="number" min="1" value="${producto.cantidad}" onchange="actualizarCantidad(${index}, this.value)">
+                </div>
+                <div>
+                    <button onclick="eliminarDelCarrito(${index})" class="button">
+                        <span class="material-symbols-outlined icon-remove">close</span>
+                    </button>
+                </div>
             `;
         cartItems.appendChild(fila);
     });
-
+    actualizarCantidadCarrito();
     actualizarTotal();
     localStorage.setItem("carrito", JSON.stringify(carrito)); // Guardar cambios en localStorage
 }
@@ -64,6 +72,11 @@ window.agregarAlCarrito = function (id) {
 
     renderizarCarrito();
 };
+
+function actualizarCantidadCarrito() {
+    const totalItems = carrito.reduce((sum, prod) => sum + prod.cantidad, 0);
+    cartCount.innerText = totalItems;
+}
 
 // Actualizar cantidad de producto
 window.actualizarCantidad = function (index, cantidad) {
@@ -85,8 +98,13 @@ function actualizarTotal() {
 
 // Vaciar carrito
 document.getElementById("emptyCart").addEventListener("click", () => {
-    carrito.length = 0;
-    renderizarCarrito();
+    if (carrito.length === 0) {
+        alert("El carrito ya está vacío. ¡Añade algunos helados deliciosos!");
+    } else {
+        carrito.length = 0;
+        renderizarCarrito();
+        alert("Has vaciado tu carrito. ¡Esperamos verte pronto!");
+    }
 });
 
 // Cargar carrito inicial
