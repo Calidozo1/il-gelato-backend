@@ -14,7 +14,82 @@ body {
     min-height: 100vh;
 }
 
+.button-cont{
+    display: flex;
+    flex-direction: row;
+}
+
+.login{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    border-radius: 1.5rem;
+    display: flex;
+    align-items: center;
+    padding: 0.80rem;
+    border: none;
+    background-color: #F83D8E;
+    color: white;
+    text-align: center;
+    cursor: pointer;
+}
+
+.arrow{
+    color: white;
+    cursor: pointer;
+}
+
+.login:hover{
+    transform: scale(1.1);
+}
+.sign-up{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-radius: 1.5rem;
+    padding: 0.80rem;
+    border: none;
+    cursor: pointer;
+}
+.sign-up:hover{
+    transform: scale(1.1);
+    background-color: #683292;
+    color: white;
+}
+
+.header-landing-page{
+    background: linear-gradient(90deg,#EFD7EF,#F5F9FC,#F8EAE1,#EAF8F9);
+    height: auto;
+    padding: 2%;
+}
+
+.landing-page{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.navigation-landing-page {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px;
+    background-color: white;
+    border-radius: 0.5rem;
+}
+
+.landing-page-logo{
+    object-fit: cover;
+    height: 50px;
+    margin-top: 10px;
+    margin-left: 10px;
+
+}
+
 .noShow {
+    display: block;
+}
+
+.landing-page {
     display: none;
 }
 .logotipo {
@@ -28,6 +103,11 @@ body {
 .contenedor-header {
     margin-bottom: 10px;
     margin-top: 0px;
+    margin-left: 0;
+    margin-right: 0;
+    background: linear-gradient(90deg,#EFD7EF,#F5F9FC,#F8EAE1,#EAF8F9);
+    height: auto;
+    padding: 2%;
 }
 
 .icecreamlogo {
@@ -42,6 +122,8 @@ body {
     justify-content: flex-start;
     flex-wrap: nowrap;
     padding: 10px;
+    background-color: white;
+    border-radius: 0.5rem;
 }
 
  .material-symbols-outlined {
@@ -99,13 +181,33 @@ img{
 }
 
 .button-cart {
-    position: fixed;
-    right: 0;
+    position: absolute;
+    right: 5%;
     display: flex;
     align-items: center;
-
+}
+.button-account{
+    position: absolute;
+    display: flex;
+    right: 10%;
+    align-items: center;
 }
 
+.account{
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.account-icon{
+    color: #683292;
+    font-size: 2.6rem;
+    transition: transform 0.2s ease-in-out;
+}
+
+.account-icon:hover{
+    transform: scale(1.2);
+}
 #cartCount {
     position: absolute;
     top: -5px;
