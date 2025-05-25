@@ -28,5 +28,9 @@ app.get("/signup", (req, res) => {
 // Usar rutas del backend
 app.use("/api/productos", productoRoutes);
 
+const rutaUsuarios = require('./backend/routes/usuariosRoutes');
+app.use('/api/usuarios', rutaUsuarios);
+
+
 const PORT = 3000;
 app.listen(PORT, () => console.log(`🚀 Servidor corriendo en http://localhost:${PORT}`));

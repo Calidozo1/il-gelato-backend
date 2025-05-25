@@ -1,32 +1,34 @@
-document.querySelector('.login-button').addEventListener('click', async () => {
-    const email = document.getElementById('email').value.trim();
-    const password = document.getElementById('password').value;
+document.getElementById('signupForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
 
-    if (!email || !password) {
-        alert("Por favor completa todos los campos.");
+    const nombre = document.getElementById('nombre').value;
+    const email = document.getElementById('email').value;
+    const cedula = document.getElementById('cedula').value;
+    const phone = document.getElementById('telefono').value;
+    const password = document.getElementById('password').value;
+    const confirmPassword = document.getElementById('confirmPassword').value;
+
+    if (password !== confirmPassword) {
+        alert("Las contraseñas no coinciden");
         return;
     }
 
     try {
-        const res = await fetch('/api/usuarios/login', {
+        const res = await fetch('/api/usuarios/signup', {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ email, password })
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ nombre, email, cedula, password, phone })
         });
 
         const data = await res.json();
-
         if (res.ok) {
-            alert("Inicio de sesión exitoso.");
-            // Puedes redirigir al usuario a otra vista
-            window.location.href = '/fronted/views/index.html';
+            alert("Registro exitoso");
+            window.location.href = '/'; // o redirige a login
         } else {
             alert("Error: " + data.mensaje);
         }
-    } catch (error) {
-        console.error("Error al iniciar sesión:", error);
-        alert("Error de conexión con el servidor.");
+    } catch (err) {
+        alert("Error de conexión");
+        console.error(err);
     }
 });
