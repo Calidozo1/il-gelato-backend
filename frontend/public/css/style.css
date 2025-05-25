@@ -5,6 +5,45 @@
     font-style: normal;
 }
 
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.noShow {
+    display: none;
+}
+.logotipo {
+    font-family: "Berkshire Swash", serif;
+    font-weight: 400;
+    font-style: normal;
+    color: #F83D8E;
+    font-size: 2rem;
+}
+
+.contenedor-header {
+    margin-bottom: 10px;
+    margin-top: 0px;
+}
+
+.icecreamlogo {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+}
+
+.navigation {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+    padding: 10px;
+}
+
  .material-symbols-outlined {
      font-variation-settings:
              'FILL' 0,
@@ -15,6 +54,14 @@
 
 img{
     object-fit: cover;
+    max-width: 100%;
+    height: auto;
+}
+
+.banner-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
 }
 
 .cart-aside {
@@ -53,12 +100,12 @@ img{
 
 .button-cart {
     position: fixed;
-    top: 10px;
-    right: 10px;
+    right: 0;
     display: flex;
     align-items: center;
 
 }
+
 #cartCount {
     position: absolute;
     top: -5px;
@@ -74,6 +121,7 @@ img{
     align-items: center;
     justify-content: center;
 }
+
 .button {
     border: none;
     background-color: transparent;
@@ -85,6 +133,7 @@ img{
     color: #683292;
     transition: transform 0.2s ease-in-out;
 }
+
 .icon-cart:hover {
     transform: scale(1.2);
 }
@@ -98,6 +147,7 @@ img{
     transition: transform 0.2s ease-in-out;
     margin: 10px;
 }
+
 .icon-remove:hover {
     transform: scale(1.2);
     color: darkred;
@@ -154,9 +204,10 @@ div {
     align-items: center;
     margin: 10px;
 }
+
 #emptyCart {
     margin: 5px;
-    border-radius: 0.5rem;
+    border-radius: 5%;
     align-items: center;
     width: 100%;
     height: 30px;
@@ -168,9 +219,11 @@ div {
 #emptyCart:hover {
     transform: scale(1.1);
 }
+
 h3 {
     margin: 5px;
 }
+
 #finalizarBuy {
     margin: 5px;
     border-radius: 0.5rem;
@@ -179,4 +232,120 @@ h3 {
 
 #cartTotal {
     font-weight: bold;
+}
+
+.alert {
+    position: fixed;
+    top: 10%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 15px 25px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    font-size: 16px;
+    text-align: center;
+    z-index: 1000;
+    opacity: 1;
+    display: block;
+    animation: fadeInOut 5s ease forwards;
+
+}
+
+.error {
+    background-color: #f44336;
+    color: #fff;
+}
+
+.success {
+    background-color: #4caf50;
+    color: #fff;
+}
+
+main {
+    flex: 1;
+}
+
+footer{
+    width: 100%;
+    background-color: #683292;
+    padding: 10px;
+    text-align: center;
+    color: white;
+}
+
+@media (max-width: 768px) {
+    body {
+        font-size: 14px;
+    }
+
+    .navigation {
+        flex-wrap: wrap;
+        text-align: center;
+    }
+
+    .logotipo {
+        font-size: 1.5rem;
+    }
+
+    .banner-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .banner-item h3 {
+        font-size: 18px;
+        text-align: center;
+    }
+
+    .cart-aside {
+        width: 100%;
+        height: auto;
+        bottom: 0;
+        top: unset;
+        right: 0
+    }
+
+    footer {
+        padding: 5px;
+    }
+}
+
+@media (max-width: 600px) {
+    .cart-aside {
+        width: 70%; /* Ajustamos el ancho para que no ocupe toda la pantalla */
+        max-width: 300px; /* Define un límite de tamaño */
+        height: 100vh; /* Mantiene la altura */
+        right: -100%; /* Oculto por defecto */
+        top: 0; /* Posiciona en la parte superior */
+        transition: right 0.4s ease-in-out;
+    }
+
+    .cart-aside.active {
+        right: 0; /* Se muestra cuando está activo */
+    }
+
+    .button-cart {
+        position: relative; /* Evita que se salga de su contenedor */
+        display: flex;
+        align-items: center;
+        right: 0;
+    }
+    .navigation {
+        justify-content: space-between; /* Mantiene elementos distribuidos */
+        padding: 10px;
+    }
+
+    #cartCount {
+        position: absolute;
+        top: -5px;
+        right: 0; /* Asegura que quede cerca del ícono del carrito */
+        transform: translateX(50%); /* Ajuste fino para centrarlo */
+    }
+    .banner-container {
+        display: block;
+    }
+
+    .banner-item {
+        padding: 10px;
+    }
 }
