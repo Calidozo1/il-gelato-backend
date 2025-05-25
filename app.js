@@ -10,14 +10,18 @@ app.use(express.json());
 // Servir archivos estáticos del frontend
 app.use(express.static(path.join(__dirname, "frontend/public")));
 
+//Ruta para servir la pagina de inicio
+app.get("/", (req, res) => {
+    res.sendFile(path.join(__dirname, "frontend", "views", "index.html"));
+});
+
+//ruta para servir la pagina de login
+app.get("/login", (req, res) => {
+    res.sendFile(path.join(__dirname, "frontend", "views", "login.html"));
+});
 
 // Usar rutas del backend
 app.use("/api/productos", productoRoutes);
-
-// Servir el archivo HTML principal
-app.get("/", (req, res) => {
-    res.sendFile(path.join(__dirname, "frontend/views/index.html"));
-});
 
 const PORT = 3000;
 app.listen(PORT, () => console.log(`🚀 Servidor corriendo en http://localhost:${PORT}`));
