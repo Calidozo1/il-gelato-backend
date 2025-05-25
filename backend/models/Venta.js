@@ -7,3 +7,7 @@ class Venta {
         this.estado = estado;
     }
 }
+
+module.exports = {
+    Venta
+}; 
