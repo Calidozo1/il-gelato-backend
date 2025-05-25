@@ -72,7 +72,7 @@ h1{
 .form-group{
     display: inline-block;
 }
-.sr-only {
+.only {
     position: absolute;
     width: 1px;
     height: 1px;
