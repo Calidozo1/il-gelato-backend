@@ -6,6 +6,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Berkshire+Swash&family=Montserrat:ital@0;1&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
   <script src="/js/script.js" defer></script>
   <title>Document</title>
@@ -15,46 +16,45 @@
   <header id="header">
     <div class="contenedor-header">
       <nav class="navigation">
-          <p class="logotipo">🍦 Il Gelatto <span>Della Nonna</span></p>
+        <img src="/img/ice-cream.png" class="icecreamlogo">
+        <p class="logotipo">Il Gelatto Della Nonna</p>
+        <div class="button-cart">
+          <button class="button" id="toggleCart">
+            <span class="material-symbols-outlined icon-cart">shopping_cart</span>
+          </button>
+          <span id="cartCount">0</span>
+        </div>
+        <aside id="cartAside" class="cart-aside">
+          <div class="cart-header">
+            <h2>Tu Carrito</h2>
+            <button id="closeCart">&times;</button>
+          </div>
+          <div class="cart-content">
+            <div id="cartItems"></div>
+          </div>
+          <div class="footer-cart">
+            <h3>Total: <span id="cartTotal">$0</span></h3>
+            <button id="emptyCart">Vaciar Carrito</button>
+            <!--<button id="finalizarBuy"> Finalizar Compra </button> !-->
+          </div>
+        </aside>
       </nav>
+
+      <section class="banner">
+        <div class="banner-container">
+          <div class="banner-item">
+            <h3>Helados Artesanales, Sabores Únicos</h3>
+          </div>
+          <div class="banner-item">
+            <h3>Postres Deliciosos con Tradición Italiana</h3>
+          </div>
+          <div class="banner-item">
+            <h3>Calidad y Pasión en Cada Bocado</h3>
+          </div>
+        </div>
+      </section>
     </div>
   </header>
-
-  <section class="banner">
-    <div class="banner-container">
-      <div class="banner-item">
-        <h3>Helados Artesanales, Sabores Únicos</h3>
-      </div>
-      <div class="banner-item">
-        <h3>Postres Deliciosos con Tradición Italiana</h3>
-      </div>
-      <div class="banner-item">
-        <h3>Calidad y Pasión en Cada Bocado</h3>
-      </div>
-    </div>
-  </section>
-
-  <div class="button-cart">
-    <button class="button" id="toggleCart">
-      <span class="material-symbols-outlined icon-cart">shopping_cart</span>
-    </button>
-    <span id="cartCount">0</span>
-  </div>
-
-  <aside id="cartAside" class="cart-aside">
-    <div class="cart-header">
-      <h2>Tu Carrito</h2>
-      <button id="closeCart">&times;</button>
-    </div>
-    <div class="cart-content">
-        <div id="cartItems"></div>
-    </div>
-    <div class="footer-cart">
-      <h3>Total: <span id="cartTotal">$0</span></h3>
-      <button id="emptyCart">Vaciar Carrito</button>
-      <!--<button id="finalizarBuy"> Finalizar Compra </button> !-->
-    </div>
-  </aside>
 
   <main>
     <div id="contenedor">
@@ -66,7 +66,8 @@
 
   <footer>
     <div class="footer">
-      <p>&copy;2024 il Gelatto Della Nonna. All rights reserved</p>
+
+        <p>&copy;2024 il Gelatto Della Nonna. All rights reserved</p>
     </div>
   </footer>
 </body>

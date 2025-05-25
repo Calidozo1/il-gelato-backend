@@ -54,6 +54,7 @@ function renderizarCarrito() {
             `;
         cartItems.appendChild(fila);
     });
+
     actualizarCantidadCarrito();
     actualizarTotal();
     localStorage.setItem("carrito", JSON.stringify(carrito)); // Guardar cambios en localStorage
@@ -66,10 +67,11 @@ window.agregarAlCarrito = function (id) {
 
     if (existente) {
         existente.cantidad++;
+        showAlert("El helado ya se encuentra en el carrito",'error');
+        return;
     } else {
         carrito.push({ ...producto, cantidad: 1 });
     }
-
     renderizarCarrito();
 };
 
@@ -99,13 +101,30 @@ function actualizarTotal() {
 // Vaciar carrito
 document.getElementById("emptyCart").addEventListener("click", () => {
     if (carrito.length === 0) {
-        alert("El carrito ya está vacío. ¡Añade algunos helados deliciosos!");
+        showAlert("El carrito ya está vacío. ¡Añade algunos helados deliciosos!",'error');
     } else {
         carrito.length = 0;
         renderizarCarrito();
-        alert("Has vaciado tu carrito. ¡Esperamos verte pronto!");
+        showAlert("Haz vaciado tu carrito, vuelve pronto!", 'success');
     }
 });
 
+function showAlert(message, type) {
+    const nonRepeatAlert = document.querySelector('.alert');
+    if (nonRepeatAlert) nonRepeatAlert.remove();
+    const div = document.createElement('div');
+    div.classList.add('alert', type);
+    div.textContent = message;
+    document.body.appendChild(div);
+
+    setTimeout(() => {
+        div.style.transition = "opacity 0.5s ease-in-out";
+        div.style.opacity = "0";
+    }, 2500);
+
+    setTimeout(() => {
+        div.remove(); // Elimina el div después de que se desvanezca completamente
+    }, 3000);
+}
 // Cargar carrito inicial
 renderizarCarrito();
