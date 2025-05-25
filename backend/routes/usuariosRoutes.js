@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-
+const { iniciarSesion } = require('../controllers/controladorPerfil');
 const { crearPerfil } = require('../controllers/controladorPerfil');
 
 router.post('/registrar', (req, res) => {
@@ -11,6 +11,17 @@ router.post('/registrar', (req, res) => {
         res.status(200).json(resultado);
     } else {
         res.status(400).json(resultado);
+    }
+});
+
+router.post('/login', (req, res) => {
+    const { email, password } = req.body;
+    const resultado = iniciarSesion(email, password);
+
+    if (resultado.exito) {
+        res.status(200).json(resultado);
+    } else {
+        res.status(401).json(resultado); // 401 = Unauthorized
     }
 });
 

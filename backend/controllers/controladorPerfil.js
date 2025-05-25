@@ -40,6 +40,10 @@ function iniciarSesion(email, password) {
     }
     return { exito: true, mensaje: "Sesión iniciada", perfil };
 }
+
+
+
+
 module.exports = {
     crearPerfil,
     iniciarSesion,
