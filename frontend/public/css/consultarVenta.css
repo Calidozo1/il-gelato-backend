@@ -69,6 +69,19 @@ h1{
 .btn-agregar:hover{
     background: grey;
 }
+.form-group{
+    display: inline-block;
+}
+.only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    white-space: nowrap;
+    border: 0;
+}
 /*///////////////////////////TABLA///////////////////////*/
 
 .content-table{
