@@ -22,8 +22,8 @@ main{
 }
 /*//////////////////////BANNER/////////////////////*/
 .contenedor{
-    width: 100%;    background: linear-gradient(to right,#efd7ef,#f5f9fc,#f8eae1,#eaf8f9);
-
+    width: 100%;
+    background: linear-gradient(to right,#efd7ef,#f5f9fc,#f8eae1,#eaf8f9);
     height: 300px;
     display: flex;
     align-items: center;
@@ -46,6 +46,7 @@ h1{
 .btn-filtrar, .btn-agregar,.fecha,.Buscar {
     font-family: "Mulish", Serif, serif;
     margin: 7px;
+    margin-top: 20px;
     text-decoration: none;
     font-size: 1.2rem;
     border-radius: 20px;
@@ -69,6 +70,7 @@ h1{
     background: grey;
 }
 /*///////////////////////////TABLA///////////////////////*/
+
 .content-table{
     border-collapse: collapse;
     margin: 25px 0;
@@ -100,6 +102,41 @@ h1{
 .content-table tbody tr:hover{
     background: #ffe9fe;
 }
+/*///////////////////PAGINACION///////////////////*/
+
+.paginacion{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 30px 0;
+}
+ul.pagination{
+    font-family: "Mulish", serif;
+    display: inline-block;
+    padding: 0;
+    margin: 0;
+}
+
+ul.pagination li{
+    display: inline;
+}
+ul.pagination li a {
+    color: black;
+    float: left;
+    padding: 9px 18px;
+    text-decoration: none;
+    border-radius: 20px;
+}
+
+ul.pagination li a.active {
+    background: deeppink;
+    color: white;
+}
+
+ul.pagination li a:hover{
+    background: gray;
+}
+
 
 /*////////////////////FOOTER/////////////////////*/
 
@@ -117,4 +154,8 @@ footer{
     flex-direction: column;
     width: 100%;
     color: white;
+}
+.texto-footer{
+    border-top: 2px solid white;
+    padding: 5px;
 }
