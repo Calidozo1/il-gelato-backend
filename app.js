@@ -20,6 +20,11 @@ app.get("/login", (req, res) => {
     res.sendFile(path.join(__dirname, "frontend", "views", "login.html"));
 });
 
+//ruta para servir la pagina de sign up
+app.get("/signup", (req, res) => {
+    res.sendFile(path.join(__dirname, "frontend", "views", "signup.html"));
+});
+
 // Usar rutas del backend
 app.use("/api/productos", productoRoutes);
 
