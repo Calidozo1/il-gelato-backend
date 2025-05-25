@@ -32,3 +32,14 @@ const PORT = 3000;
 app.listen(PORT, () =>
     console.log(`🚀 Servidor corriendo en http://localhost:${PORT}`)
 );
+
+///////////////Probando script en registro///////////////////////////
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
+app.use(express.static(path.join(__dirname, 'public')));
+
+// Usar tu ruta
+const rutaUsuarios = require('./backend/routes/usuariosRoutes');
+app.use('/api/usuarios', rutaUsuarios);
+///////////////////////Fin Probando script en registro/////////////////
