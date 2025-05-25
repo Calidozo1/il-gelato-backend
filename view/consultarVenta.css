@@ -14,6 +14,7 @@ main{
     display: flex;
     align-items: center;
     justify-content: left;
+    margin-left: 100px;
 }
 .logo-container img{
     width: 200px;
@@ -21,12 +22,12 @@ main{
 }
 /*//////////////////////BANNER/////////////////////*/
 .contenedor{
-    width: 100%;
+    width: 100%;    background: linear-gradient(to right,#efd7ef,#f5f9fc,#f8eae1,#eaf8f9);
+
     height: 300px;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(to right,#efd7ef,#f5f9fc,#f8eae1,#eaf8f9);
 }
 h1{
     font-family: "Berkshire Swash", serif;
@@ -107,6 +108,7 @@ footer{
     width: 100%;
     height: 200px;
     padding: 10px 0;
+    font-family: "Mulish", serif;
 }
 .footer-container{
     display: flex;
