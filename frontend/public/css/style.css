@@ -138,11 +138,11 @@ body {
 }
 
 #seccionCliente{
-    display: none;
+    display: block;
 }
 
 #seccionAdmin {
-    display: block;
+    display: none;
     width: 100%;
 }
 /*============================================================================
