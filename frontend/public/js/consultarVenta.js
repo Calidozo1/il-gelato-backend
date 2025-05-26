@@ -1,30 +1,61 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const buscarInput = document.querySelector('.Buscar');
-    const fechaInput = document.querySelector('.fecha');
-    const filtrarBtn = document.querySelector('.btn-filtrar');
-    const tablaBody = document.querySelector('.content-table tbody');
+    const ventasBody = document.querySelector(".content-table tbody");
+    const buscarInput = document.getElementById("buscarInput");
+    const fechaInput = document.getElementById("fechaInput");
+    const btnFiltrar = document.querySelector(".btn-filtrar");
+    const formFiltro = document.querySelector(".filtro");
 
-    const ventasIniciales = ventaController.obtenerTodas();
-    mostrarVentas(ventasIniciales);
+    // Cargar todas las ventas al iniciar
+    cargarVentas();
 
-    filtrarBtn.addEventListener('click', (e)=>{
+    // Filtrar al enviar el formulario
+    formFiltro.addEventListener("submit", (e) => {
         e.preventDefault();
-        const ventasFiltradas = ventaController.filtrarVentas({
-            texto: buscarInput.value,
-            fecha: fechaInput.value
-        });
-        mostrarVentas(ventasFiltradas);
+        cargarVentas();
     });
 
-    function mostrarVentas(ventas){
-        tablaBody.innerHTML = ventas.map(venta => `
-        <tr>
-            <td>${venta.cliente}</td>
-            <td>${venta.nOrden}</td>
-            <td>${venta.fecha}</td>
-            <td>${venta.precio}$</td>
-            <td>${venta.estado}</td>     
-        <tr>   
-        `).join('');
+    async function cargarVentas() {
+        const params = new URLSearchParams();
+
+        if (buscarInput.value) params.append("buscar", buscarInput.value);
+        if (fechaInput.value) params.append("fecha", fechaInput.value);
+
+        try {
+            const response = await fetch(`/api/ventas?${params.toString()}`);
+            if (!response.ok) throw new Error("Error al obtener ventas");
+
+            const ventas = await response.json();
+            renderizarVentas(ventas);
+        } catch (error) {
+            console.error("Error:", error);
+            alert("Ocurrió un error al cargar las ventas");
+        }
+    }
+
+    function renderizarVentas(ventas) {
+        ventasBody.innerHTML = "";
+
+        if (ventas.length === 0) {
+            ventasBody.innerHTML = `<tr><td colspan="5" style="text-align: center;">No se encontraron ventas</td></tr>`;
+            return;
+        }
+
+        ventas.forEach(venta => {
+            const tr = document.createElement("tr");
+            tr.innerHTML = `
+                <td>${venta.cliente}</td>
+                <td>${venta.nOrden}</td>
+                <td>${formatearFecha(venta.fecha)}</td>
+                <td>$${venta.precio.toFixed(2)}</td>
+                <td>${venta.estado}</td>
+            `;
+            ventasBody.appendChild(tr);
+        });
+    }
+
+    function formatearFecha(fecha) {
+        // Convierte de YYYY-MM-DD a DD/MM/YYYY
+        const [year, month, day] = fecha.split("-");
+        return `${day}/${month}/${year}`;
     }
 });
