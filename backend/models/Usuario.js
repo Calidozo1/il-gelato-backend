@@ -1,28 +1,30 @@
-const express = require('express');
-const router = express.Router();
-const { iniciarSesion } = require('../controllers/registroController');
-const { crearPerfil } = require('../controllers/registroController');
-
-router.post('/signup', (req, res) => {
-    const { nombre, email, cedula, password, phone } = req.body;
-
-    const resultado = crearPerfil(nombre, email, cedula, password, phone);
-    if (resultado.exito) {
-        res.status(200).json(resultado);
-    } else {
-        res.status(400).json(resultado);
+class Usuario {
+    constructor(nombre, email, cedula, password, phone) {
+        this.nombre = nombre;
+        this.email = email;
+        this.cedula = cedula;
+        this.password = password;
+        this.phone = phone;
     }
-});
+}
 
-router.post('/login', (req, res) => {
-    const { email, password } = req.body;
-    const resultado = iniciarSesion(email, password);
-
-    if (resultado.exito) {
-        res.status(200).json(resultado);
-    } else {
-        res.status(401).json(resultado); // 401 = Unauthorized
+class Cliente extends Usuario{
+    constructor(nombre, email, cedula, password, phone) {
+        super(nombre, email, cedula, password, phone);
+        this.esAdmin = false;
     }
-});
+}
 
-module.exports = router;
+
+class Admin extends Usuario {
+    constructor(nombre, email, cedula, password, phone) {
+        super(email,password);
+        this.esAdmin = true;
+    }
+}
+
+module.exports = {
+    Cliente,
+    Usuario,
+    Admin
+};
