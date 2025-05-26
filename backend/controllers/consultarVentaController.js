@@ -3,9 +3,8 @@ const { ventas } = require("../models/Venta");
 exports.getVentas = (req, res) => {
     const { buscar, fecha } = req.query;
 
-    let resultados = [...ventas]; // Copia para no modificar el original
+    let resultados = [...ventas];
 
-    // Filtro por texto (busca en cliente o nOrden)
     if (buscar) {
         const termino = buscar.toLowerCase();
         resultados = resultados.filter(v =>
@@ -13,8 +12,6 @@ exports.getVentas = (req, res) => {
             v.nOrden.toLowerCase().includes(termino)
         );
     }
-
-    // Filtro por fecha (exacta)
     if (fecha) {
         resultados = resultados.filter(v => v.fecha === fecha);
     }
