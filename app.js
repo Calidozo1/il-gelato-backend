@@ -21,3 +21,14 @@ app.get("/", (req, res) => {
 
 const PORT = 3000;
 app.listen(PORT, () => console.log(`🚀 Servidor corriendo en http://localhost:${PORT}`));
+
+const multer = require('multer');
+const upload = multer({ dest: 'frontend/public/img/' });
+
+app.post('/api/productos/upload', upload.single('imagen'), (req, res) => {
+  if (!req.file) {
+    return res.status(400).json({ mensaje: 'No se subió ninguna imagen' });
+  }
+  const rutaImagen = `/img/${req.file.filename}`;
+  res.json({ imagen: rutaImagen });
+});

@@ -8,6 +8,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="css/style.css">
   <script src="/js/script.js" defer></script>
+  <script src="/backend/controllers/consultarController.js"></script>
   <title>Document</title>
 </head>
 
@@ -71,23 +72,117 @@
 </div>
 
 <!-- CONTENIDO ADMIN (inicialmente oculto) -->
-  <div id="seccionAdmin">
-    <main>
-      <div class="Consultar-Helado">
-          <div class="Gradient"></div>
+ <div id="seccionAdmin">
+      <main>
+      <div class="consultar-helado-todo">
+        <div class="consultar-helado">
+          <div class="Gradient">
+            <span class="titulo-consultar-helado">Consultar Helado</span>
+            <div class="bienvenido-boton"><span class="Bienvenido">Bienvenido</span></div>
+          </div>
+        </div>
+        <div class="lista-helados-filtro">
+          <div class="form-buscador">
+            <input type="text" placeholder="Buscar" class="input-buscar" />
+            <button type="submit" class="boton-buscar"></button>
+          </div>
+          <div class="tabla-consultar">
+            <div class="cabecera-tabla">
+              <div class="textos-cabecera">
+                <div class="lista-de-helados">Lista de helados</div>
+                <div class="texto-todas">Todas</div>
+              </div>
+              <div class="boton-nuevo-helado"><div class="nuevo-helado"></div></div>
+            </div>
+            <div class="fila-titulos">
+              <div class="ID">ID</div>
+              <div class="nombre">Nombre</div>
+              <div class="precio">Precio</div>
+              <div class="info">Info</div>
+            </div>
+            <div class="linea-contenedor"></div>
+            <div id="contenedor-filas"></div>
+          </div>
+          <!-- Contenedor de flechas de paginación -->
+          <div class="botones-navegacion">
+            <div id="anterior" class="flecha flecha-anterior"></div>
+            <span id="pagina-actual">1</span>
+            <div id="siguiente" class="flecha flecha-siguiente"></div>
+          </div>
+        </div>
+<!-- Popup modal para información extra del helado -->
+<div id="modal-overlay" class="modal-overlay">
+  <div class="info-extra-helado">
+    <div class="contenido-popup">
+      <div id="helado-nombre"></div>
+      <div class="fila-detalle">
+        <div class="icono icono-stock"></div>
+        <span id="helado-stock" class="valor-detalle"></span>
       </div>
-      
-      <!-- <button id="mostrarCliente">Mostrar Cliente</button> <button id="mostrarAdminBtn" class="boton-admin">Mostrar Administrador</button> -->
-      
-    </main>
-  </div>
-
-  <footer>
-    <div class="footer">
-      <p>&copy;2024 il Gelatto Della Nonna. All rights reserved</p>
+      <div class="fila-detalle">
+        <div class="icono icono-id"></div>
+        <span id="helado-id" class="valor-detalle"></span>
+      </div>
+      <div class="fila-detalle">
+        <div class="icono icono-precio"></div>
+        <span id="helado-precio" class="valor-detalle"></span>
+      </div>
+      <div id="helado-descripcion-actual">Descripción</div>
+      <div id="helado-descripcion"></div>
     </div>
-  </footer>
+    <div class="cerrar-popup"></div>
+  </div>
+</div>
+</div>
+
+<div id="agregar-helado">
+  <div class="Gradient">
+    <span class="titulo-agregar-helado">Agregar Helado</span>
+    <div class="bienvenido-boton"><span class="Bienvenido">Bienvenido</span></div>
+  </div>
+  <div class="agregar-nuevo-helado">
+    <div class="titulo2-agregar-helado"></div>
+    <div class="contenedor-campos">
+      <div class="llenar-3">
+        <div class="texto-campo">Nombre</div>
+        <input type="text" class="boton-llenar" id="boton-llenar-nombre" placeholder="Nombre del helado">
+        <div class="texto-campo">ID</div>
+        <input type="text" class="boton-llenar" id="boton-llenar-id" placeholder="ID">
+        <div class="texto-campo">Precio</div>
+        <input type="text" class="boton-llenar" id="boton-llenar-precio" placeholder="Precio">
+        <div class="texto-campo">Cantidad</div>
+        <input type="number" class="boton-llenar" id="boton-llenar-stock" placeholder="Stock" min="0">
+        <div class="texto-campo">Imagen</div>
+        <input type="file" class="boton-llenar" id="boton-llenar-imagen" accept="image/*">
+        <div id="preview-imagen" style="width: 100px; height: 100px; margin-top: 10px; border: 1px solid #ccc;"></div>
+
+      <div class="texto-campo">Descripción</div>
+      <textarea class="boton-llenar-descripcion" id="boton-llenar-descripcion" placeholder="Descripción"></textarea>
+      <div class="contenedor-botones">
+        <div class="btn-cancelar"></div>
+        <div class="btn-guardar"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+        
+      </main>
+    </div>
+    <footer>
+      <div class="footer">
+        <div class="footer-image"></div>
+        <div class="container-footer">
+          <div class="contenedor-logo-texto">
+            <div class="logo-footer"></div>
+          </div>
+          <div class="footer-image-contacto"></div>
+          <div class="footer-image-derechos"></div>
+        </div>
+      </div>
+    </footer>
   </div>
 </body>
 </html>
-
