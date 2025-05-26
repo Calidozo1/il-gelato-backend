@@ -1,4 +1,4 @@
-
+version: '3.8'
 services:
   mysql:
     image: mysql:8.0
@@ -13,6 +13,12 @@ services:
       MYSQL_PASSWORD: heladeria_password
     volumes:
       - mysql_data:/var/lib/mysql
+    networks:
+      - heladeria_network  # Agregamos una red compartida
+
+networks:
+  heladeria_network:
+    driver: bridge  # Red en modo puente para permitir conexión entre equipos
 
 volumes:
   mysql_data:
