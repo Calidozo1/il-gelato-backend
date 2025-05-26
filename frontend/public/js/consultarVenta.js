@@ -16,19 +16,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
     async function cargarVentas() {
         const params = new URLSearchParams();
-
         if (buscarInput.value) params.append("buscar", buscarInput.value);
         if (fechaInput.value) params.append("fecha", fechaInput.value);
 
         try {
-            const response = await fetch(`/api/ventas?${params.toString()}`);
+            // Cambia esta línea (usa la ruta completa):
+            const response = await fetch(`http://localhost:3000/api/ventas?${params.toString()}`);
             if (!response.ok) throw new Error("Error al obtener ventas");
 
             const ventas = await response.json();
             renderizarVentas(ventas);
         } catch (error) {
             console.error("Error:", error);
-            alert("Ocurrió un error al cargar las ventas");
+            alert("Ocurrió un error al cargar las ventas. ¿El servidor está corriendo?");
         }
     }
 
