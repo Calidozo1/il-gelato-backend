@@ -125,12 +125,12 @@ body {
    Nota: Se establece display: none; (oculto) y se podrá cambiar mediante JS */
 .landing-page {
     width: 100%;
-    display: none;
+    display: block;
     flex-direction: column;
 }
 
 .noShow{
-    display: block;
+    display: none;
 }
 /*============================================================================
   6. Banner Global (Catálogo)

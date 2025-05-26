@@ -105,6 +105,22 @@
         <p>&copy;2024 il Gelatto Della Nonna. All rights reserved</p>
     </div>
   </footer>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const landingPage = document.querySelector(".landing-page");
+      const noShow = document.querySelector(".noShow");
+
+      // Si la bandera está activa, se asume que el usuario ya inició sesión
+      if (localStorage.getItem("isLoggedIn") === "true") {
+        landingPage.style.display = "none";
+        noShow.style.display = "block";
+      } else {
+        landingPage.style.display = "block";
+        noShow.style.display = "none";
+      }
+    });
+  </script>
 </body>
 </html>
 
