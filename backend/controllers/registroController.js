@@ -1,5 +1,5 @@
 const usuarios = []; // Lista temporal de perfiles en memoria
-const { Usuario, Admin } = require('../models/Perfil');
+const { Usuario, Admin } = require('../models/Usuario');
 function crearPerfil(nombre, email, cedula, password, phone, esAdmin = false) {
     // Validaciones básicas
     if (!nombre || !email || !cedula || !password || !phone) {
@@ -25,9 +25,7 @@ function crearPerfil(nombre, email, cedula, password, phone, esAdmin = false) {
         return { exito: false, mensaje: "Ya existe un perfil con esa cédula" };
     }
 
-    const perfil = esAdmin
-        ? new Admin(nombre, email, cedula, password, phone)
-        : new Usuario(nombre, email, cedula, password, phone);
+    const perfil = esAdmin ? new Admin(email, password) : new Usuario(nombre, email, cedula, password, phone);
 
     usuarios.push(perfil);
     return { exito: true, mensaje: "Perfil creado exitosamente", perfil };
@@ -43,5 +41,4 @@ function iniciarSesion(email, password) {
 module.exports = {
     crearPerfil,
     iniciarSesion,
-    usuarios
 };
