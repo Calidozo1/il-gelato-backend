@@ -18,7 +18,7 @@ class Cliente extends Usuario{
 
 class Admin extends Usuario {
     constructor(nombre, email, cedula, password, phone) {
-        super(email,password);
+        super(nombre, email, cedula, password, phone);
         this.esAdmin = true;
     }
 }

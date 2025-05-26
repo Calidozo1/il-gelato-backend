@@ -1,29 +1,30 @@
 const express = require("express");
 const path = require("path");
-const productoRoutes = require("./backend/routes/productoRoutes");
-
 const app = express();
 
-// Middleware para procesar JSON
-app.use(express.json());
 
-// Servir archivos estáticos como CSS, imágenes, JS
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+// Archivos estáticos
 app.use(express.static(path.join(__dirname, "frontend/public")));
 
-// Rutas de productos (API)
-app.use("/api/productos", productoRoutes);
+// Rutas API
+const productoRoutes = require("./backend/routes/productoRoutes");
+const rutaUsuarios = require('./backend/routes/usuariosRoutes');
 
-// ✅ Ruta para index.html
+app.use("/api/productos", productoRoutes);
+app.use("/api/usuarios", rutaUsuarios);
+
+// Rutas frontend (vistas)
 app.get("/", (req, res) => {
     res.sendFile(path.join(__dirname, "frontend/views/index.html"));
 });
 
-// ✅ Ruta para login.html
 app.get("/login", (req, res) => {
     res.sendFile(path.join(__dirname, "frontend/views/login.html"));
 });
 
-// ✅ Ruta para register.html
 app.get("/registrarse", (req, res) => {
     res.sendFile(path.join(__dirname, "frontend/views/registrarse.html"));
 });
@@ -32,14 +33,3 @@ const PORT = 3000;
 app.listen(PORT, () =>
     console.log(`🚀 Servidor corriendo en http://localhost:${PORT}`)
 );
-
-///////////////Probando script en registro///////////////////////////
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
-
-app.use(express.static(path.join(__dirname, 'public')));
-
-// Usar tu ruta
-const rutaUsuarios = require('./backend/routes/usuariosRoutes');
-app.use('/api/usuarios', rutaUsuarios);
-///////////////////////Fin Probando script en registro/////////////////

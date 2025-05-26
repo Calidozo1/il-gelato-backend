@@ -1,27 +1,38 @@
 const express = require('express');
 const router = express.Router();
-const { iniciarSesion } = require('../controllers/controladorPerfil');
-const { crearPerfil } = require('../controllers/controladorPerfil');
+const { crearPerfil, iniciarSesion } = require('../controllers/controladorUsuario');
 
-router.post('/registrar', (req, res) => {
+// Registrar usuario
+router.post('/registrar', async (req, res) => {
     const { nombre, email, cedula, password, phone } = req.body;
 
-    const resultado = crearPerfil(nombre, email, cedula, password, phone);
-    if (resultado.exito) {
-        res.status(200).json(resultado);
-    } else {
-        res.status(400).json(resultado);
+    try {
+        const resultado = await crearPerfil(nombre, email, cedula, password, phone);
+        if (resultado.exito) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(400).json(resultado);
+        }
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ exito: false, mensaje: "Error interno del servidor" });
     }
 });
 
-router.post('/login', (req, res) => {
+// Login
+router.post('/login', async (req, res) => {
     const { email, password } = req.body;
-    const resultado = iniciarSesion(email, password);
 
-    if (resultado.exito) {
-        res.status(200).json(resultado);
-    } else {
-        res.status(401).json(resultado); // 401 = Unauthorized
+    try {
+        const resultado = await iniciarSesion(email, password);
+        if (resultado.exito) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(401).json(resultado);
+        }
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ exito: false, mensaje: "Error interno del servidor" });
     }
 });
 
