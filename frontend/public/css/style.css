@@ -129,12 +129,12 @@ body {
    Nota: Se establece display: none; (oculto) y se podrá cambiar mediante JS */
 .landing-page {
     width: 100%;
-    display: block;
+    display: none;
     flex-direction: column;
 }
 
 .noShow{
-    display: none;
+    display: block;
 }
 
 #seccionCliente{
@@ -142,7 +142,7 @@ body {
 }
 
 #seccionAdmin {
-    display: none;
+    display: block;
     width: 100%;
 }
 /*============================================================================
