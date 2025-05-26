@@ -1,6 +1,7 @@
 const express = require("express");
 const path = require("path");
 const productoRoutes = require("./backend/routes/productoRoutes");
+const ventaRoutes = require("./backend/routes/ventaRoutes");
 
 const app = express();
 
@@ -27,8 +28,9 @@ app.get("/signup", (req, res) => {
 
 // Ruta para servir la página de consultar ventas
 app.get("/consultar-ventas", (req, res) => {
-    res.sendFile(path.join(__dirname, "frontend/views/Consultar_Venta.html"));
+    res.sendFile(path.join(__dirname, "frontend", "views", "consultarVenta.html"));
 });
+
 
 // Usar rutas del backend
 app.use("/api/productos", productoRoutes);

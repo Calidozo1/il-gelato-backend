@@ -1,47 +1,68 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const ventasBody = document.querySelector(".content-table tbody");
     const buscarInput = document.getElementById("buscarInput");
     const fechaInput = document.getElementById("fechaInput");
-    const formFiltro = document.querySelector(".filtro");
+    const formulario = document.querySelector(".filtro");
+    const tbody = document.querySelector("tbody");
 
-    // Cargar ventas al iniciar
-    cargarVentas();
-
-    // Manejar el filtrado
-    formFiltro.addEventListener("submit", async (e) => {
+    formulario.addEventListener("submit", async (e) => {
         e.preventDefault();
-        await cargarVentas();
+
+        const buscar = buscarInput.value.trim();
+        const fecha = fechaInput.value;
+
+        const url = new URL("/api/ventas", window.location.origin);
+        if (buscar) url.searchParams.append("buscar", buscar);
+        if (fecha) url.searchParams.append("fecha", fecha);
+
+        try {
+            const respuesta = await fetch(url.toString());
+            const datos = await respuesta.json();
+            llenarTabla(datos);
+        } catch (error) {
+            console.error("Error al consultar ventas:", error);
+        }
     });
 
-    async function cargarVentas() {
-        try {
-            // Construir URL con parámetros
-            const params = new URLSearchParams();
-            if (buscarInput.value) params.append('buscar', buscarInput.value);
-            if (fechaInput.value) params.append('fecha', fechaInput.value);
+    function llenarTabla(ventas) {
+        tbody.innerHTML = "";
 
-            const response = await fetch(`http://localhost:3000/api/ventas?${params.toString()}`);
-            const ventas = await response.json();
-
-            mostrarVentas(ventas);
-        } catch (error) {
-            console.error("Error:", error);
-            ventasBody.innerHTML = `<tr><td colspan="5">Error al cargar ventas</td></tr>`;
+        if (ventas.length === 0) {
+            const fila = document.createElement("tr");
+            const celda = document.createElement("td");
+            celda.colSpan = 5;
+            celda.textContent = "No hay resultados";
+            fila.appendChild(celda);
+            tbody.appendChild(fila);
+            return;
         }
+
+        ventas.forEach((venta) => {
+            const fila = document.createElement("tr");
+
+            const cliente = document.createElement("td");
+            cliente.textContent = venta.cliente;
+
+            const nOrden = document.createElement("td");
+            nOrden.textContent = venta.nOrden;
+
+            const fecha = document.createElement("td");
+            fecha.textContent = venta.fecha;
+
+            const precio = document.createElement("td");
+            precio.textContent = venta.precio.toFixed(2);
+
+            const estado = document.createElement("td");
+            estado.textContent = venta.estado;
+
+            fila.appendChild(cliente);
+            fila.appendChild(nOrden);
+            fila.appendChild(fecha);
+            fila.appendChild(precio);
+            fila.appendChild(estado);
+
+            tbody.appendChild(fila);
+        });
     }
 
-    function mostrarVentas(ventas) {
-        ventasBody.innerHTML = ventas.length > 0
-            ? ventas.map(venta => `
-                <tr>
-                    <td>${venta.cliente}</td>
-                    <td>${venta.nOrden}</td>
-                    <td>${venta.fecha.split('-').reverse().join('/')}</td>
-                    <td>$${venta.precio.toFixed(2)}</td>
-                    <td>${venta.estado}</td>
-                </tr>
-              `).join('')
-
-            : `<tr><td colspan="5">No se encontraron ventas</td></tr>`;
-    }
+    formulario.dispatchEvent(new Event("submit"));
 });
