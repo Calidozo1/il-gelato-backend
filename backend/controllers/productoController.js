@@ -20,8 +20,8 @@ exports.eliminarProducto = (req, res) => {
 
     if (index !== -1) {
         productos.splice(index, 1);
-        res.json({ mensaje: "Producto eliminado correctamente" });
+        res.json({ mensaje: "Producto.js eliminado correctamente" });
     } else {
-        res.status(404).json({ mensaje: "Producto no encontrado" });
+        res.status(404).json({ mensaje: "Producto.js no encontrado" });
     }
 };

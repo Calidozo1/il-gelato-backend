@@ -12,8 +12,8 @@ class Producto {
 
 // Base de datos en memoria (Array)
 const productos = [
-    new Producto(1, "Helado de Vainilla", "Suave y delicioso", 5.99, 20, "/frontend/plublic/img/icecream.png", "Helados"),
-    new Producto(2, "Tiramisú", "Postre italiano con café", 7.99, 15, "/frontend/plublic/img/icecream.png", "Postres"),
+    new Producto(1, "Helado De Vainilla", "Suave y delicioso", 5.99, 20, "/frontend/plublic/img/icecream.png", "Helados"),
+    new Producto(2, "Helado De Chocolate", "Postre italiano con café", 7.99, 15, "/frontend/plublic/img/icecream.png", "Postres"),
 ];
 
 module.exports = { Producto, productos };
