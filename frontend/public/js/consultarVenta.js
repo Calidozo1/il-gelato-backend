@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", () => {
             if (buscarInput.value) params.append('buscar', buscarInput.value);
             if (fechaInput.value) params.append('fecha', fechaInput.value);
 
-            const response = await fetch(`/api/ventas?${params.toString()}`);
+            const response = await fetch(`http://localhost:3000/api/ventas?${params.toString()}`);
             const ventas = await response.json();
 
             mostrarVentas(ventas);
@@ -41,6 +41,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     <td>${venta.estado}</td>
                 </tr>
               `).join('')
+
             : `<tr><td colspan="5">No se encontraron ventas</td></tr>`;
     }
 });
