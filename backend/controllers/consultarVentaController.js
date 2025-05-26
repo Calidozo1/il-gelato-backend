@@ -15,6 +15,5 @@ exports.getVentas = (req, res) => {
     if (fecha) {
         resultados = resultados.filter(v => v.fecha === fecha);
     }
-
     res.json(resultados);
 };

@@ -10,12 +10,14 @@ document.addEventListener("DOMContentLoaded", () => {
         const buscar = buscarInput.value.trim();
         const fecha = fechaInput.value;
 
-        const url = new URL("/api/ventas", window.location.origin);
-        if (buscar) url.searchParams.append("buscar", buscar);
-        if (fecha) url.searchParams.append("fecha", fecha);
+        let url = "/api/ventas";
+        const params = new URLSearchParams();
+        if (buscar) params.append("buscar", buscar);
+        if (fecha) params.append("fecha", fecha);
+        if (params.toString()) url += "?" + params.toString();
 
         try {
-            const respuesta = await fetch(url.toString());
+            const respuesta = await fetch(url);
             const datos = await respuesta.json();
             llenarTabla(datos);
         } catch (error) {
