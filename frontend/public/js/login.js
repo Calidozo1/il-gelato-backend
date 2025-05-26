@@ -20,7 +20,7 @@ document.querySelector('.login-button').addEventListener('click', async () => {
 
         if (res.ok) {
             alert("Inicio de sesión exitoso.");
-            // Puedes redirigir al usuario a otra vista
+
             window.location.href = '/fronted/views/index.html';
         } else {
             alert("Error: " + data.mensaje);
