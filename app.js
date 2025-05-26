@@ -25,13 +25,13 @@ app.get("/signup", (req, res) => {
     res.sendFile(path.join(__dirname, "frontend", "views", "signup.html"));
 });
 //Ruta para la pagina de ventas
-app.use("/api/productos", productoRoutes);
-app.use("/api/ventas", require("./backend/routes/ventaRoutes"));
 app.get("/consultar-ventas", (req, res) => {
     res.sendFile(path.join(__dirname, "frontend", "views", "Consultar_Venta.html"));
 });
+
 // Usar rutas del backend
 app.use("/api/productos", productoRoutes);
+
 
 const PORT = 3000;
 app.listen(PORT, () => console.log(`🚀 Servidor corriendo en http://localhost:${PORT}`));
