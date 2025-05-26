@@ -1,3 +1,6 @@
+/*============================================================================
+  1. Global Reset and Base Styles
+============================================================================*/
 * {
     font-family: "Montserrat", sans-serif;
     font-optical-sizing: auto;
@@ -9,101 +12,422 @@ body {
     margin: 0;
     padding: 0;
     height: 100%;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
 }
 
-.noShow {
+/*============================================================================
+  2. Botones y Contenedores Comunes
+============================================================================*/
+.button-cont {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.login,
+.sign-up {
+    border-radius: 1.5rem;
+    padding: 0.8rem;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+}
+
+.login {
+    margin: 10px 0 10px 10px;
+    display: flex;
+    align-items: center;
+    background-color: #f83d8e;
+    color: white;
+    text-align: center;
+}
+
+.arrow {
+    color: white;
+    cursor: pointer;
+    /* Opcional: agregar espacio entre el texto y el icono */
+    margin-left: 5px;
+}
+
+.login:hover {
+    transform: scale(1.1);
+}
+
+.sign-up {
+    margin: 10px 0;
+    background-color: white;
+    color: #683292;
+}
+
+.sign-up:hover {
+    transform: scale(1.1);
+    background-color: #683292;
+    color: white;
+}
+
+/*============================================================================
+  3. Landing Page & Header
+============================================================================*/
+.header-landing-page {
+    background: linear-gradient(90deg, #efd7ef, #f5f9fc, #f8eae1, #eaf8f9);
+    padding: 2%;
+    height: auto;
+}
+
+.navigation-landing-page {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px;
+    padding: 10px;
+    background-color: white;
+    border-radius: 0.5rem;
+}
+
+.landing-page-logo {
+    object-fit: cover;
+    height: 50px;
+    margin: 10px 0 0 10px;
+}
+
+/*============================================================================
+  4. Banner de la Landing Page
+============================================================================*/
+.landing-page-banner {
+    margin-top: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60vh;
+    background: linear-gradient(90deg, #efd7ef, #f5f9fc, #f8eae1, #eaf8f9);
+    text-align: center;
+    padding: 20px;
+}
+
+.banner-items {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.banner-item h3 {
+    font-family: "Berkshire Swash", serif;
+    font-size: 2rem;
+    color: #000;
+}
+
+/*============================================================================
+  5. Landing Page Container & Estado
+============================================================================*/
+/* La clase .landing-page se usa en dos momentos, por eso se agrupa aquí.
+   Nota: Se establece display: none; (oculto) y se podrá cambiar mediante JS */
+.landing-page {
+    width: 100%;
+    display: block;
+    flex-direction: column;
+}
+
+.noShow{
     display: none;
 }
-.logotipo {
+/*============================================================================
+  6. Banner Global (Catálogo)
+============================================================================*/
+.banner {
     font-family: "Berkshire Swash", serif;
     font-weight: 400;
     font-style: normal;
-    color: #F83D8E;
-    font-size: 2rem;
+    font-size: 4rem;
 }
 
+.banner-container {
+    background: linear-gradient(90deg, #efd7ef, #f5f9fc, #f8eae1, #eaf8f9);
+    margin: 0;
+    font-family: "Berkshire Swash", serif;
+    font-weight: 400;
+    font-style: normal;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.banner-container h1 {
+    font-family: "Berkshire Swash", serif;
+}
+/*============================================================================
+  7. Logotipo y Header del Catálogo
+============================================================================*/
 .contenedor-header {
-    margin-bottom: 10px;
-    margin-top: 0px;
+    margin: 0;
+    background-color: #ffffff;
+    padding: 2%;
+    height: auto;
 }
 
 .icecreamlogo {
-    width: 40px;
-    height: 40px;
+    width: auto;
+    height: auto;
     object-fit: contain;
 }
 
+/*============================================================================
+  8. Navegación (Catálogo)
+============================================================================*/
 .navigation {
     display: flex;
     align-items: center;
     justify-content: flex-start;
     flex-wrap: nowrap;
     padding: 10px;
+    background-color: white;
+    border-radius: 0.5rem;
 }
 
- .material-symbols-outlined {
-     font-variation-settings:
-             'FILL' 0,
-             'wght' 400,
-             'GRAD' 0,
-             'opsz' 24
- }
+/*============================================================================
+  9. Material Symbols
+============================================================================*/
+.material-symbols-outlined {
+    font-variation-settings:
+            'FILL' 0,
+            'wght' 400,
+            'GRAD' 0,
+            'opsz' 24;
+}
 
-img{
+/*============================================================================
+  10. Imágenes Globales
+============================================================================*/
+img {
     object-fit: cover;
     max-width: 100%;
     height: auto;
 }
 
-.banner-container {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-}
-
+/*============================================================================
+  11. Sidebar del Carrito
+============================================================================*/
 .cart-aside {
     position: fixed;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     top: 0;
     right: -100%;
-    width: 300px;
+    width: 320px;
     height: 100vh;
-    background: #c17df4;
-    box-shadow: -2px 0 10px rgba(0, 0, 0, 0.2);
-    padding: 20px;
+    background: #f5ecf0;
+    box-shadow: -8px 0 15px rgba(0, 0, 0, 0.2);
+    padding: 10px;
     transition: right 0.4s ease-in-out;
+    z-index: 999;
+
 }
 
 .cart-aside.active {
-    right: 0; /* Se muestra cuando está activo */
+    right: 0;
 }
 
+#cartItems img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+/*============================================================================
+  12. Header y Contenido del Carrito
+============================================================================*/
 .cart-header {
+    flex: 0 0 auto;
+    font-size: 1.5rem;
+    padding: 0.5rem;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    position: relative;
+    font-size: 1.5rem;
 }
 
+.cart-header h2 {
+     font-family: "Berkshire Swash", serif;
+    margin: 0;
+ }
 .cart-header button {
     background: transparent;
     border: none;
-    font-size: 20px;
+    font-size: 4rem;
+    cursor: pointer;
+    margin: 5px;
+    color: red;
+}
+
+.cart-content {
+    flex: 1;
+    overflow-y: auto;
+    margin: 10px 0;
+}
+
+/*============================================================================
+  13. Contenedores de Productos y Productos
+============================================================================*/
+#contenedor {
+    margin: 10px 0 0 10px;
+    display: flex;
+    flex-direction: row;
+}
+
+.helado {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin: 0;
+    padding: 2%;
+    margin: 0 300px 0 0;
+    justify-content: center;
+}
+
+.producto {
+    background-color: #ffeaf2;
+    border-radius: 0.5rem;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    margin: 10px;
+    width: 200px;
+    height: 350px;
+    overflow: hidden;
+}
+
+.producto div {
+    width: auto;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.producto div img {
+    width: auto;
+    height: 150px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    margin-top: 20px;
+}
+
+.image {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    display: block
+}
+
+.producto div h3{
+    /*font-weight: bold;*/
+    width: auto;
+    height: 50px;
+    margin: 10px 0 0 0;
+    position: relative;
+    top: 40%;
+    font-weight: bold;
+    color: #683292;
+    font-size: 1.5rem;
+}
+
+.producto div p{
+    font-weight: bold;
+    width: auto;
+    height: 30px;
+    margin: 10px 0 0 0;
+    font-size: 1.5rem;
+    position: relative;
+    bottom: -150%;
+    right: 100%;
+}
+
+.categories{
+    margin-top: 50px;
+    margin-left: 50px;
+    margin-right: 100px;
+}
+
+
+.producto div button{
+    background: none;
+    border: none;
+    position: relative;
+    bottom: -25%;
+    left: 120%;
+}
+
+.add-cart {
+    background-color: #f83d8e;
+    color: white;
+    border: none;
+    border-radius: 1.5rem;
+    padding: 0.8rem;
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+}
+
+.add-cart:hover {
+    transform: scale(1.1);
+    color: white;
+    background-color: #683292;
+}
+
+#searchInput {
+    border: 2px solid #f83d8e;
+    border-radius: 1.5rem;
+    background-color: transparent;
+    padding: 0.5rem;
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+}
+
+.categories h3 {
+    font-family: "Berkshire Swash", serif;
+    font-size: 1.5rem;
+}
+
+/*============================================================================
+  14. Botones del Carrito y Cuenta
+============================================================================*/
+.button-cart {
+    position: absolute;
+    right: 5%;
+    display: flex;
+    align-items: center;
+}
+
+.button-account {
+    position: absolute;
+    right: 10%;
+    display: flex;
+    align-items: center;
+}
+
+.account {
+    border: none;
+    background-color: transparent;
     cursor: pointer;
 }
 
-.cart-content table {
-    width: 100%;
-    margin-top: 10px;
+.account-icon {
+    color: #683292;
+    font-size: 2.6rem;
+    transition: transform 0.2s ease-in-out;
 }
 
-.button-cart {
-    position: fixed;
-    right: 0;
-    display: flex;
-    align-items: center;
-
+.account-icon:hover {
+    transform: scale(1.2);
 }
 
 #cartCount {
@@ -122,6 +446,9 @@ img{
     justify-content: center;
 }
 
+/*============================================================================
+  15. Botones e Iconos Generales
+============================================================================*/
 .button {
     border: none;
     background-color: transparent;
@@ -139,7 +466,7 @@ img{
 }
 
 .icon-remove {
-    font-size: 20px; /* Tamaño diferente */
+    font-size: 20px;
     color: white;
     background-color: red;
     border-radius: 60%;
@@ -151,8 +478,11 @@ img{
 .icon-remove:hover {
     transform: scale(1.2);
     color: darkred;
- }
+}
 
+/*============================================================================
+  16. Layout del Contenido del Carrito
+============================================================================*/
 .cart-content {
     display: flex;
     flex-direction: column;
@@ -161,44 +491,72 @@ img{
 #cartItems {
     display: flex;
     flex-direction: column;
-    padding: 5px;
     margin-top: 10px;
 }
 
 .cont-cant {
     min-width: 30px;
     max-width: 50px;
-    width: auto;
 }
 
 .counter-cantidad {
-    width: 30px; /* Tamaño más pequeño */
+    width: 30px;
     height: 30px;
     padding: 5px;
     text-align: center;
     background-color: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(10px);
     border-radius: 0.5rem;
-    border: 1px solid white;
-    color: white;
+    border: 1px solid #101010;
+    color: #101010;
     font-size: 1rem;
     margin: 5px;
+}
+
+.item-price{
+    font-weight: bold;
 }
 
 .fila {
     display: flex;
     flex-direction: row;
+    flex-wrap: nowrap;
     justify-content: center;
     align-items: center;
     margin: 10px;
-    padding: 5px;
+    padding: 2%;
+    border-bottom: 1px solid #101010;
+
+    font-size: 0.90rem;
+    overflow: hidden;
 }
 
-div {
-    margin: 10px;
+.fila div {
+    margin: 5px;
 }
 
-.footer-cart{
+.fila > div:first-child {
+    width: auto;
+    height: 50px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.fila > div:first-child img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    display: block
+}
+
+/*============================================================================
+  17. Footer del Carrito y Botones de Acción
+============================================================================*/
+.footer-cart {
+    flex: 0 0 auto;
     display: flex;
     flex-direction: row-reverse;
     align-items: center;
@@ -207,8 +565,8 @@ div {
 
 #emptyCart {
     margin: 5px;
-    border-radius: 5%;
-    align-items: center;
+    border-radius: 1.5rem;
+    border: none;
     width: 100%;
     height: 30px;
     color: white;
@@ -220,20 +578,19 @@ div {
     transform: scale(1.1);
 }
 
-h3 {
-    margin: 5px;
-}
-
 #finalizarBuy {
     margin: 5px;
     border-radius: 0.5rem;
-    background-color: #cccccc;
+    background-color: #ccc;
 }
 
 #cartTotal {
     font-weight: bold;
 }
 
+/*============================================================================
+  18. Alerts
+============================================================================*/
 .alert {
     position: fixed;
     top: 10%;
@@ -248,7 +605,6 @@ h3 {
     opacity: 1;
     display: block;
     animation: fadeInOut 5s ease forwards;
-
 }
 
 .error {
@@ -261,11 +617,14 @@ h3 {
     color: #fff;
 }
 
+/*============================================================================
+  19. Main & Footer Global
+============================================================================*/
 main {
     flex: 1;
 }
 
-footer{
+footer {
     width: 100%;
     background-color: #683292;
     padding: 10px;
@@ -273,38 +632,31 @@ footer{
     color: white;
 }
 
+/*============================================================================
+  20. Responsive Media Queries
+============================================================================*/
 @media (max-width: 768px) {
     body {
         font-size: 14px;
     }
-
     .navigation {
         flex-wrap: wrap;
         text-align: center;
     }
-
     .logotipo {
         font-size: 1.5rem;
     }
-
     .banner-container {
         flex-direction: column;
         align-items: center;
     }
-
     .banner-item h3 {
         font-size: 18px;
         text-align: center;
     }
-
-    .cart-aside {
-        width: 100%;
-        height: auto;
-        bottom: 0;
-        top: unset;
-        right: 0
+    .contenedor-header {
+        padding: 1.5%;
     }
-
     footer {
         padding: 5px;
     }
@@ -312,39 +664,35 @@ footer{
 
 @media (max-width: 600px) {
     .cart-aside {
-        width: 70%; /* Ajustamos el ancho para que no ocupe toda la pantalla */
-        max-width: 300px; /* Define un límite de tamaño */
-        height: 100vh; /* Mantiene la altura */
-        right: -100%; /* Oculto por defecto */
-        top: 0; /* Posiciona en la parte superior */
+        width: 70%;
+        max-width: 300px;
+        height: 100vh;
+        right: -100%;
+        top: 0;
         transition: right 0.4s ease-in-out;
     }
-
     .cart-aside.active {
-        right: 0; /* Se muestra cuando está activo */
+        right: 0;
     }
-
     .button-cart {
-        position: relative; /* Evita que se salga de su contenedor */
+        position: relative;
         display: flex;
         align-items: center;
         right: 0;
     }
     .navigation {
-        justify-content: space-between; /* Mantiene elementos distribuidos */
+        justify-content: space-between;
         padding: 10px;
     }
-
     #cartCount {
         position: absolute;
         top: -5px;
-        right: 0; /* Asegura que quede cerca del ícono del carrito */
-        transform: translateX(50%); /* Ajuste fino para centrarlo */
+        right: 0;
+        transform: translateX(50%);
     }
     .banner-container {
         display: block;
     }
-
     .banner-item {
         padding: 10px;
     }

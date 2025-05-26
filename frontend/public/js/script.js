@@ -1,7 +1,10 @@
 const productos = [
-    { id: 1, nombre: "Gelato de Pistacho", precio: 5, imagen: "/img/icecream.png" },
-    { id: 2, nombre: "Gelato de Chocolate", precio: 4.5, imagen: "/img/icecream.png" },
-    { id: 3, nombre: "Gelato de Fresa", precio: 4, imagen: "/img/food.png" }
+    { id: 1, nombre: "Helado De Chocolate con Sirope", precio: 5, stock: 30, imagen: "/img/chocolate con sirope.png" },
+    { id: 2, nombre: "Helado De Chocolate", precio: 4.5,stock: 35, imagen: "/img/chocolate.png" },
+    { id: 3, nombre: "Helado De Fresa", precio: 4, stock: 25, imagen: "/img/fresa.png" },
+    {id: 4, nombre: "Helado De Menta", precio: 6, stock: 15, imagen: "/img/menta.png" },
+    {id: 5, nombre: "Helado De Vainilla", precio: 7, stock: 20, imagen: "/img/vainilla.png" },
+    {id: 6, nombre: "Helado De Dulce de Leche",precio: 8, stock:  18, imagen: "/img/dulce de leche.png" },
 ];
 
 let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
@@ -12,17 +15,49 @@ const cartTotal = document.getElementById("cartTotal");
 const cartCount = document.getElementById("cartCount");
 
 // Renderizar productos en la tienda
-productos.forEach(producto => {
-    const div = document.createElement("div");
-    div.classList.add("producto");
-    div.innerHTML = `
-            <img src="${producto.imagen}" alt="${producto.nombre}" width="100">
-            <h3>${producto.nombre}</h3>
-            <p>Precio: $${producto.precio.toFixed(2)}</p>
-            <button onclick="agregarAlCarrito(${producto.id})">Añadir al carrito</button>
-        `;
-    listaProductos.appendChild(div);
+function renderProductos(lista) {
+    listaProductos.innerHTML = "";
+    if (lista.length === 0) {
+        listaProductos.innerHTML = "<p>No se encontraron productos.</p>";
+        return;
+    }
+    lista.forEach(producto => {
+        const div = document.createElement("div");
+        div.classList.add("producto");
+        div.innerHTML = `
+      <div class="image">
+        <img src="${producto.imagen}" alt="${producto.nombre}">
+      </div>
+      <div class="item-name">
+        <h3>${producto.nombre}</h3>
+      </div>
+      <div class="item-price">
+        <p>$${producto.precio.toFixed(2)}</p>
+      </div>
+      <div>
+        <button onclick="agregarAlCarrito(${producto.id})">
+            <span class="material-symbols-outlined add-cart">add_shopping_cart</span>
+        </button>
+      </div>
+    `;
+        listaProductos.appendChild(div);
+    });
+}
+
+// Inicialmente se muestran todos los productos
+renderProductos(productos);
+
+// Listener para filtrar productos en tiempo real
+const searchInput = document.getElementById("searchInput");
+searchInput.addEventListener("input", (e) => {
+    const filtro = e.target.value.trim().toLowerCase();
+    const productosFiltrados = productos.filter(producto =>
+        producto.nombre.toLowerCase().includes(filtro)
+    );
+    renderProductos(productosFiltrados);
 });
+
+
 
 document.getElementById("toggleCart").addEventListener("click", () => {
     cartAside.classList.toggle("active");
@@ -40,9 +75,9 @@ function renderizarCarrito() {
         const fila = document.createElement("div");
         fila.classList.add("fila");
         fila.innerHTML = `
-                <div><img src="${producto.imagen}" alt="${producto.nombre}" width="50"></div>
+                <div><img src="${producto.imagen}" alt="${producto.nombre}"></div>
                 <div>${producto.nombre}</div>
-                <div>$${producto.precio.toFixed(2)}</div>
+                <div class="item-price">$${producto.precio.toFixed(2)}</div>
                 <div class="cont-cant">
                     <input class="counter-cantidad" type="number" min="1" value="${producto.cantidad}" onchange="actualizarCantidad(${index}, this.value)">
                 </div>
@@ -63,6 +98,15 @@ function renderizarCarrito() {
 // Agregar producto al carrito
 window.agregarAlCarrito = function (id) {
     const producto = productos.find(p => p.id === id);
+
+    // Verificamos que haya stock disponible
+    if (producto.stock <= 0) {
+        showAlert("No hay stock disponible para este helado", 'error');
+        return;
+    }
+
+    producto.stock--;
+
     const existente = carrito.find(p => p.id === id);
 
     if (existente) {
@@ -71,6 +115,7 @@ window.agregarAlCarrito = function (id) {
         return;
     } else {
         carrito.push({ ...producto, cantidad: 1 });
+        showAlert("Producto añadido al carrito", 'success');
     }
     renderizarCarrito();
 };
