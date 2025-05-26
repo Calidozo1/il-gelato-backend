@@ -7,3 +7,11 @@ class Venta {
         this.estado = estado;
     }
 }
+
+const ventas = [
+    new Venta("Valentina Da Camara", "AA002", "2025-05-20", 5.4, "Pendiente"),
+    new Venta("Pedro Da Silva", "AA003", "2025-06-21", 2.7, "Entregado"),
+    new Venta("María González", "AA004", "2025-05-21", 8.1, "Entregado")
+];
+
+module.exports = { Venta, ventas };
