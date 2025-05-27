@@ -122,13 +122,44 @@ agregarHelado.addEventListener("submit", async (event) => {
     const precio = document.getElementById("precio").value;
     const stock = document.getElementById("stock").value;
     const imagen = document.getElementById("imagen").value;
-    const categoria = document.getElementById("categoria").value;
+
+    const file = imagen.files[0];
+    if (!file) {
+        alert('Por favor selecciona una imagen');
+        return;
+    }
+
+    async function resizeAndCompress(file, maxWidth = 1024, quality = 0.6) {
+        return new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = () => {
+                const img = new Image();
+                img.src = reader.result;
+                img.onload = () => {
+                    const canvas = document.createElement('canvas');
+                    const scale = maxWidth / img.width;
+                    canvas.width = maxWidth;
+                    canvas.height = img.height * scale;
+                    const ctx = canvas.getContext('2d');
+                    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+                    // Convertir a base64 comprimido en JPEG (puedes cambiar a 'image/png' si prefieres)
+                    const compressedBase64 = canvas.toDataURL('image/jpeg', quality);
+                    resolve(compressedBase64);
+                };
+                img.onerror = error => reject(error);
+            };
+            reader.onerror = error => reject(error);
+        });
+    }
 
     try {
+        const imagenComprimida = await resizeAndCompress(file);
+
         const respuesta = await fetch("http://localhost:3000/api/productos", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ nombre, descripcion, precio, stock, imagen, categoria })
+            body: JSON.stringify({ nombre, descripcion, precio, stock, imagen: imagenComprimida })
         });
 
         if (respuesta.ok) {
