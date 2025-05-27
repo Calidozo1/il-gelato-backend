@@ -1,19 +1,26 @@
-const { ventas } = require("../models/Venta");
+const db = require("../config/db");
 
-exports.getVentas = (req, res) => {
+exports.getVentas = async (req, res) => {
     const { buscar, fecha } = req.query;
 
-    let resultados = [...ventas];
+    try {
+        let query = 'SELECT * FROM ventas WHERE 1=1';
+        const params = [];
 
-    if (buscar) {
-        const termino = buscar.toLowerCase();
-        resultados = resultados.filter(v =>
-            v.cliente.toLowerCase().includes(termino) ||
-            v.nOrden.toLowerCase().includes(termino)
-        );
+        if (buscar) {
+            query += ' AND (cliente LIKE ? OR nOrden LIKE ?)';
+            params.push(`%${buscar}%`, `%${buscar}%`);
+        }
+
+        if (fecha) {
+            query += ' AND fecha = ?';
+            params.push(fecha);
+        }
+
+        const [ventas] = await db.query(query, params);
+        res.json(ventas);
+    } catch (error) {
+        console.error('Error al consultar ventas:', error);
+        res.status(500).json({ error: 'Error interno al consultar ventas' });
     }
-    if (fecha) {
-        resultados = resultados.filter(v => v.fecha === fecha);
-    }
-    res.json(resultados);
 };
