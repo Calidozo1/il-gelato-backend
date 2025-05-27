@@ -35,7 +35,6 @@ document.addEventListener("DOMContentLoaded", () => {
             tbody.appendChild(fila);
             return;
         }
-
         ventas.forEach((venta) => {
             const fila = document.createElement("tr");
             const cliente = document.createElement("td");
