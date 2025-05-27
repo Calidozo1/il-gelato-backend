@@ -17,21 +17,7 @@ app.use(cors());
 app.use(express.static('./vista'));
 app.set('views', './vista');
 app.set('view engine', 'ejs');
-
-// Conexión a MySQL
-const connection = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: '$$BD77&f*',
-    database: 'regitroventas'
-});
-connection.connect();
-
-
-
-
-
-
+const db = require("./backend/config/db");
 
 
 // Servir archivos estáticos del frontend
@@ -39,7 +25,7 @@ app.use(express.static(path.join(__dirname, "frontend/public")));
 
 //Ruta para servir la pagina de inicio
 app.get("/", (req, res) => {
-    res.sendFile(path.join(__dirname, "frontend", "views", "index.ejs"));
+    res.sendFile(path.join(__dirname, "frontend", "views", "index.html"));
 });
 
 //ruta para servir la pagina de login
@@ -64,7 +50,7 @@ app.get("/consultarPerfil", (req, res) => {
 
 // Ruta para ver catalogo
 app.get('/catalogo', (req, res) => {
-    res.sendFile(path.join(__dirname, "frontend", "views", "index.ejs"));
+    res.sendFile(path.join(__dirname, "frontend", "views", "index.html"));
 })
 
 // Usar rutas del backend
@@ -74,7 +60,7 @@ app.use("/api/usuarios", usuariosRoutes);
 
 // Página principal
 app.get('/registrar-ventas', function (req, res) {
-    res.render('RegistrarVentas');
+    res.render(path.join(__dirname, "frontend", "views", "registrarventas.ejs"));
 });
 
 // Validaciones
@@ -100,14 +86,14 @@ app.post('/guardardatos', async (req, res) => {
 
         // Insertar los datos en la base de datos (ejemplo)
         const values = [user,orden,fecha,hora,parseInt(number)];
-        const query = `INSERT INTO ventas  (usuario,infopedido,fecha,hora,norden) VALUES (?) `;
-        connection.query(query,[values]);
+        const query = `INSERT INTO ventas  (cliente,pedido,fecha,hora,nOrden) VALUES (?) `;
+        db.query(query,[values]);
 
         // Responder al cliente
-        res.render('exitoso')
+        res.redirect("/consultar-ventas");
     } catch (error) {
         console.error('Error al guardar los datos:', error);
-        res.status(500).render('RegistrarVentas',{error: error});
+        res.status(500).render(path.join(__dirname, "frontend", "views", "registrarventas.ejs"),{error:error});
     }
 });
 
