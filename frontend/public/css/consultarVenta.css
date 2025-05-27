@@ -9,6 +9,14 @@ main{
     flex: 1;
     width: 100%;
 }
+
+button {
+    border: none;
+}
+input {
+    border: none;
+    background-color: #bcbcbc;
+}
 /*/////////////////////LOGO//////////////////////////*/
 .logo-container{
     display: flex;

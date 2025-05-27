@@ -816,6 +816,7 @@ footer {
 
 .form-buscador {
     display: flex;
+    flex-direction: row;
     align-items: center;
     width: 235px;
     height: 44px;
@@ -826,7 +827,10 @@ footer {
     overflow: hidden;
     position: relative;
 }
-
+.boton-consult-sales {
+    display: flex;
+    justify-content: flex-end;
+}
 .input-buscar {
     flex: 1;
     height: 42px;
