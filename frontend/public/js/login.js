@@ -21,7 +21,12 @@ document.querySelector('.login-button').addEventListener('click', async () => {
         if (res.ok) {
             alert("Inicio de sesión exitoso.");
 
-            window.location.href = '/fronted/views/index.html';
+
+            if (data.perfil.esAdmin) {
+                window.location.href = '/consultar-ventas';
+            } else {
+                window.location.href = '/';
+            }
         } else {
             alert("Error: " + data.mensaje);
         }

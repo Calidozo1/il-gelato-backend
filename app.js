@@ -2,6 +2,7 @@ const express = require("express");
 const path = require("path");
 const productoRoutes = require("./backend/routes/productoRoutes");
 const ventaRoutes = require("./backend/routes/ventaRoutes");
+const usuariosRoutes = require("./backend/routes/usuariosRoutes");
 
 const app = express();
 
@@ -35,6 +36,8 @@ app.get("/consultar-ventas", (req, res) => {
 // Usar rutas del backend
 app.use("/api/productos", productoRoutes);
 app.use("/api/ventas", ventaRoutes);
+app.use("/api/usuarios", usuariosRoutes);
 
 const PORT = 3000;
 app.listen(PORT, () => console.log(`🚀 Servidor corriendo en http://localhost:${PORT}`));
+
