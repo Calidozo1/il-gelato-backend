@@ -32,6 +32,10 @@ app.get("/consultar-ventas", (req, res) => {
     res.sendFile(path.join(__dirname, "frontend", "views", "consultarVenta.html"));
 });
 
+// Ruta para consultar perfil
+app.get("/consultarPerfil", (req, res) => {
+    res.sendFile(path.join(__dirname, "frontend", "views", "consultarPerfil.html"));
+});
 
 // Usar rutas del backend
 app.use("/api/productos", productoRoutes);

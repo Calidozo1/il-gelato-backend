@@ -58,7 +58,13 @@ async function iniciarSesion(email, password) {
     }
 }
 
+async function obtenerPerfil(email) {
+    const [rows] = await db.query('SELECT nombre, email, cedula, password, phone FROM usuarios WHERE email = ?', [email]);
+    return rows[0];
+}
+
 module.exports = {
     crearPerfil,
-    iniciarSesion
+    iniciarSesion,
+    obtenerPerfil
 };

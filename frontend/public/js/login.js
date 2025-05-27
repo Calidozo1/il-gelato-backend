@@ -19,13 +19,14 @@ document.querySelector('.login-button').addEventListener('click', async () => {
         const data = await res.json();
 
         if (res.ok) {
+            localStorage.setItem("email", data.perfil.email);
             alert("Inicio de sesión exitoso.");
 
 
             if (data.perfil.esAdmin) {
                 window.location.href = '/consultar-ventas';
             } else {
-                window.location.href = '/';
+                window.location.href = '/consultarPerfil';
             }
         } else {
             alert("Error: " + data.mensaje);
