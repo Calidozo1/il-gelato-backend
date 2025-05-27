@@ -20,8 +20,14 @@ document.querySelector('.login-button').addEventListener('click', async () => {
 
         if (res.ok) {
             alert("Inicio de sesión exitoso.");
+            if (data.rol === 'admin') {
+                localStorage.setItem("isLoggedIn&isAdmin", "true");
+                window.location.href = '/fronted/views/index.html';
+            } else {
+                localStorage.setItem("isLoggedIn", "true");
+                window.location.href = '/fronted/views/index.html';
+            }
 
-            window.location.href = '/fronted/views/index.html';
         } else {
             alert("Error: " + data.mensaje);
         }

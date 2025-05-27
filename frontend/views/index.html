@@ -221,21 +221,30 @@
     </div>
   </footer>
 
-  <!--<script>
+  <script>
     document.addEventListener("DOMContentLoaded", () => {
       const landingPage = document.querySelector(".landing-page");
       const noShow = document.querySelector(".noShow");
+      const cliente = document.getElementById("seccionCliente");
+      const admin = document.getElementById("seccionAdmin");
 
       // Si la bandera está activa, se asume que el usuario ya inició sesión
-      if (localStorage.getItem("isLoggedIn") === "true") {
+      if (localStorage.getItem("isLoggedIn&isAdmin") === "true") {
         landingPage.style.display = "none";
         noShow.style.display = "block";
-      } else {
+        admin.style.display = "block";
+
+      } if (localStorage.getItem("isLoggedIn") === "true"){
+        landingPage.style.display = "none";
+        noShow.style.display = "block";
+        cliente.style.display = "block";
+      }
+      else {
         landingPage.style.display = "block";
         noShow.style.display = "none";
       }
     })
-  </script>!-->
+  </script>
 </body>
 </html>
 
