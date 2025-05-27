@@ -238,8 +238,7 @@
       <img src="/img/footer.png">
     </div>
   </footer>
-
-
+  <script>
     document.addEventListener("DOMContentLoaded", () => {
       const landingPage = document.querySelector(".landing-page");
       const noShow = document.querySelector(".noShow");
@@ -255,13 +254,14 @@
         seccionAdmin.style.display = "none";
       }
 
-      if (currentPath === "/catalogo") {
+      if (currentPath === "/consultar-ventas") {
         landingPage.style.display = "none";
         noShow.style.display = "block";
         seccionCliente.style.display = "none";
         seccionAdmin.style.display = "block";
       }
     });
+  </script>
 
 </body>
 </html>

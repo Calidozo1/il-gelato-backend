@@ -21,23 +21,12 @@ document.querySelector('.login-button').addEventListener('click', async () => {
         if (res.ok) {
             localStorage.setItem("email", data.perfil.email);
             alert("Inicio de sesión exitoso.");
-            const landingPage = document.querySelector(".landing-page");
-            const noShow = document.querySelector(".noShow");
-            const seccionCliente = document.getElementById("seccionCliente");
-            const seccionAdmin = document.getElementById("seccionAdmin");
-            if (data.perfil.esAdmin) {
-                window.location.href = '/catalogo';
-                landingPage.style.display = "none";
-                noShow.style.display = "block";
-                seccionCliente.style.display = "none";
-                seccionAdmin.style.display = "block";
 
+
+            if (data.perfil.esAdmin) {
+                window.location.href = '/consultar-ventas';
             } else {
                 window.location.href = '/catalogo';
-                landingPage.style.display = "none";
-                noShow.style.display = "block";
-                seccionCliente.style.display = "block";
-                seccionAdmin.style.display = "none";
             }
         } else {
             alert("Error: " + data.mensaje);

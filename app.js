@@ -8,6 +8,10 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const mysql = require('mysql2');
 
+
+app.use("/api/productos", productoRoutes);
+
+
 // Middlewares
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -54,7 +58,6 @@ app.get('/catalogo', (req, res) => {
 })
 
 // Usar rutas del backend
-app.use("/api/productos", productoRoutes);
 app.use("/api/ventas", ventaRoutes);
 app.use("/api/usuarios", usuariosRoutes);
 

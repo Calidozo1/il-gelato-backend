@@ -1,27 +1,43 @@
-const { productos, Producto } = require("../models/Producto");
+const Producto = require("../models/Producto");
 
-// Obtener todos los productos
 exports.obtenerProductos = (req, res) => {
-    res.json(productos);
+    Producto.obtenerTodos((err, productos) => {
+        if (err)
+            return res.status(500).json({ mensaje: "Error al obtener productos", error: err });
+        res.json(productos);
+    });
 };
 
-// Agregar un nuevo producto
 exports.agregarProducto = (req, res) => {
-    const { nombre, descripcion, precio, stock, imagen, categoria } = req.body;
-    const nuevoProducto = new Producto(productos.length + 1, nombre, descripcion, precio, stock, imagen, categoria);
-    productos.push(nuevoProducto);
-    res.status(201).json(nuevoProducto);
+    // Imprime el body para depurar
+    console.log("Datos recibidos en agregarProducto:", req.body);
+
+    const { nombre, descripcion, precio, stock, imagen } = req.body;
+    if (!nombre || !descripcion || !precio || !stock || !imagen) {
+        return res.status(400).json({ mensaje: "Todos los campos son obligatorios" });
+    }
+
+    // Crea el nuevo producto. El campo id se coloca en null ya que MySQL lo generará automáticamente.
+    const nuevoProducto = new Producto(null, nombre, descripcion, precio, stock, imagen);
+
+    // Usa el método agregar definido en el modelo, que utiliza la conexión ya configurada.
+    Producto.agregar(nuevoProducto, (err, insertId) => {
+        if (err) {
+            console.error("Error en MySQL:", err);
+            return res.status(500).json({ mensaje: "Error al agregar producto", error: err });
+        }
+        res.status(201).json({ id: insertId, nombre, descripcion, precio, stock, imagen });
+    });
 };
 
-// Eliminar un producto por ID
 exports.eliminarProducto = (req, res) => {
     const { id } = req.params;
-    const index = productos.findIndex(prod => prod.id == id);
-
-    if (index !== -1) {
-        productos.splice(index, 1);
-        res.json({ mensaje: "Producto.js eliminado correctamente" });
-    } else {
-        res.status(404).json({ mensaje: "Producto.js no encontrado" });
-    }
+    Producto.eliminarPorId(id, (err, eliminado) => {
+        if (err)
+            return res.status(500).json({ mensaje: "Error al eliminar producto", error: err });
+        if (!eliminado)
+            return res.status(404).json({ mensaje: "Producto no encontrado" });
+        res.json({ mensaje: "Producto eliminado correctamente" });
+    });
 };
+
