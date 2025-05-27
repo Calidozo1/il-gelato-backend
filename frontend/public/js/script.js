@@ -1,3 +1,5 @@
+// Variables globales
+let productosDB = [];  // Productos obtenidos desde la base de datos
 let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
 const listaProductos = document.getElementById("listaProductos");
 const cartAside = document.getElementById("cartAside");
@@ -8,6 +10,28 @@ const botonNuevoHelado = document.querySelector('.boton-nuevo-helado');
 const consultarHeladoTodo = document.querySelector('.consultar-helado-todo');
 const agregarHelado = document.getElementById('agregar-helado');
 const botonCancelarAgregar =  document.querySelector('.btn-cancelar');
+const imagenInput = document.getElementById('boton-llenar-imagen');
+const previewImagen = document.getElementById('preview-imagen');
+let imagenSeleccionada = null;
+// Variables de paginación
+let paginaActual = 0;
+const heladosPorPagina = 4;
+const inputBuscar = document.querySelector('.input-buscar');
+const spanBuscar = document.querySelector('.Buscar');
+// Elementos de la tabla de administrador
+const contenedorFilas = document.getElementById('contenedor-filas');
+// Popup modal
+const modalOverlay = document.getElementById('modal-overlay');
+const cerrarPopup = document.querySelector('.cerrar-popup');
+// Selecciona los elementos del formulario
+const nombreInput = document.getElementById('boton-llenar-nombre');
+const precioInput = document.getElementById('boton-llenar-precio');
+const stockInput = document.getElementById('boton-llenar-stock');
+const descripcionInput = document.getElementById('boton-llenar-descripcion');
+const btnGuardar = document.querySelector('.btn-guardar');
+const btnCancelar = document.querySelector('.btn-cancelar');
+const searchInput = document.getElementById("searchInput");
+
 
 /////// ADMIN AGREGAR HELADOS ///////////
 // Cargar productos desde la API
@@ -33,6 +57,8 @@ async function cargarProductos() {
         }
 
         renderizarHelados(productos);
+        renderProductos(productos);
+        renderizarCarrito(productos);
     } catch (error) {
         console.error("Error al obtener los productos:", error);
     }
@@ -114,18 +140,6 @@ agregarHelado.addEventListener("submit", async (event) => {
     }
 });
 
-// Variables de paginación
-let paginaActual = 0;
-const heladosPorPagina = 4;
-
-// Elementos de la tabla de administrador
-const contenedorFilas = document.getElementById('contenedor-filas');
-
-// Popup modal
-const modalOverlay = document.getElementById('modal-overlay');
-const cerrarPopup = document.querySelector('.cerrar-popup');
-
-
 if (cerrarPopup) {
     cerrarPopup.addEventListener("click", cerrarModal);
 }
@@ -168,8 +182,6 @@ function abrirPopup(helado) {
     modalOverlay.style.display = "flex";
 }
 
-
-
 function cerrarModal() {
     modalOverlay.style.display = 'none';
 }
@@ -205,7 +217,6 @@ function renderizarHelados(productos) {
         fila.querySelector(".info img").addEventListener("click", () => abrirPopup(producto));
     });
 }
-
 
 function actualizarPaginaActual() {
     document.getElementById('pagina-actual').textContent = paginaActual;
@@ -283,9 +294,6 @@ async function filtrarHelados(texto) {
     }
 }
 
-const inputBuscar = document.querySelector('.input-buscar');
-const spanBuscar = document.querySelector('.Buscar'); // Asegúrate de que exista o elimina esta línea
-
 function filtrarHelados(texto) {
     if (!texto) return productos;
     return productos.filter(producto =>
@@ -342,15 +350,6 @@ botonNuevoHelado?.addEventListener('click', function() {
 botonCancelarAgregar?.addEventListener('click', function() {
     mostrarConsultarHelado();
 });
-
-// Selecciona los elementos del formulario
-const nombreInput = document.getElementById('boton-llenar-nombre');
-const idInput = document.getElementById('boton-llenar-id');
-const precioInput = document.getElementById('boton-llenar-precio');
-const stockInput = document.getElementById('boton-llenar-stock');
-const descripcionInput = document.getElementById('boton-llenar-descripcion');
-const btnGuardar = document.querySelector('.btn-guardar');
-const btnCancelar = document.querySelector('.btn-cancelar');
 
 // Función para validar los campos
 
@@ -467,10 +466,6 @@ btnCancelar.addEventListener('click', function() {
     limpiarFormulario();
 });
 
-const imagenInput = document.getElementById('boton-llenar-imagen');
-const previewImagen = document.getElementById('preview-imagen');
-let imagenSeleccionada = null;
-
 imagenInput.addEventListener('change', function(e) {
     const file = e.target.files[0];
     if (file) {
@@ -482,56 +477,76 @@ imagenInput.addEventListener('change', function(e) {
         reader.readAsDataURL(file);
     }
 });
-/*
+
 ////////// USUARIOOO CARRITO CLIENTE //////////////
 
 // Renderizar productos en la tienda
-function renderProductos(lista) {
+async function cargarProductos() {
+    try {
+        const respuesta = await fetch("http://localhost:3000/api/productos");
+        if (!respuesta.ok) {
+            console.error(`Error en la API: ${respuesta.status} - ${respuesta.statusText}`);
+            return;
+        }
+        const data = await respuesta.json();
+        if (Array.isArray(data)) {
+            productosDB = data;
+            renderProductos(productosDB);
+        } else {
+            console.error("La respuesta de la API no es una lista válida.");
+        }
+    } catch (error) {
+        console.error("Error al obtener productos:", error);
+    }
+}
+
+function renderProductos(productos) {
     listaProductos.innerHTML = "";
-    if (lista.length === 0) {
+    if (!Array.isArray(productos) || productos.length === 0) {
         listaProductos.innerHTML = "<p>No se encontraron productos.</p>";
         return;
     }
-    lista.forEach(producto => {
+
+    productos.forEach(producto => {
+        const precioNumerico = parseFloat(producto.precio); // Convertir a número
+        if (isNaN(precioNumerico)) {
+            console.warn(`El precio del producto con ID ${producto.id} no es válido.`);
+            return;
+        }
+
         const div = document.createElement("div");
         div.classList.add("producto");
         div.innerHTML = `
       <div class="image">
-        <img src="${producto.imagen}" alt="${producto.nombre}">
+          <img src="${producto.imagen}" alt="${producto.nombre}">
       </div>
       <div class="item-name">
-        <h3>${producto.nombre}</h3>
+          <h3>${producto.nombre}</h3>
       </div>
       <div class="item-price">
-        <p>$${producto.precio.toFixed(2)}</p>
+          <p>$${precioNumerico.toFixed(2)}</p>
       </div>
       <div>
-        <button onclick="agregarAlCarrito(${producto.id})">
-            <span class="material-symbols-outlined add-cart">add_shopping_cart</span>
-        </button>
+          <button onclick="agregarAlCarrito(${producto.id})">
+              <span class="material-symbols-outlined add-cart">add_shopping_cart</span>
+          </button>
       </div>
       <div style="display: none">
-        <span>${producto.descripcion}</span>  
+          <span>${producto.descripcion}</span>  
       </div>
     `;
         listaProductos.appendChild(div);
     });
 }
 
-// Inicialmente se muestran todos los productos
-renderProductos(productos);
-
 // Listener para filtrar productos en tiempo real
-const searchInput = document.getElementById("searchInput");
 searchInput.addEventListener("input", (e) => {
     const filtro = e.target.value.trim().toLowerCase();
-    const productosFiltrados = productos.filter(producto =>
+    const productosFiltrados = productosDB.filter(producto =>
         producto.nombre.toLowerCase().includes(filtro)
     );
     renderProductos(productosFiltrados);
 });
-
-
 
 document.getElementById("toggleCart").addEventListener("click", () => {
     cartAside.classList.toggle("active");
@@ -545,14 +560,29 @@ document.getElementById("closeCart").addEventListener("click", () => {
 function renderizarCarrito() {
     cartItems.innerHTML = "";
     cartCount.innerText = "0";
-    carrito.forEach((producto, index) => {
-        const fila = document.createElement("div");
-        fila.classList.add("fila");
-        fila.innerHTML = `
-                <div><img src="${producto.imagen}" alt="${producto.nombre}"></div>
-                <div>${producto.nombre}</div>
-                <div style="display: none">${producto.descripcion}</div>
-                <div class="item-price">$${producto.precio.toFixed(2)}</div>
+
+    if (carrito.length === 0) {
+        cartItems.innerHTML = "<p>Tu carrito está vacío.</p>";
+    } else {
+        carrito.forEach((producto, index) => {
+            const precioNumerico = parseFloat(producto.precio);
+            if (isNaN(precioNumerico)) {
+                console.warn(`El precio del producto con ID ${producto.id} no es válido.`);
+                return;
+            }
+
+            const fila = document.createElement("div");
+            fila.classList.add("fila");
+            fila.innerHTML = `
+                <div>
+                    <img src="${producto.imagen}" alt="${producto.nombre}">
+                </div>
+                <div>${producto.nombre}
+                </div>
+                <div style="display: none">${producto.descripcion}
+                </div>
+                <div class="item-price">$${precioNumerico.toFixed(2)}
+                </div>
                 <div class="cont-cant">
                     <input class="counter-cantidad" type="number" min="1" value="${producto.cantidad}" onchange="actualizarCantidad(${index}, this.value)">
                 </div>
@@ -562,32 +592,35 @@ function renderizarCarrito() {
                     </button>
                 </div>
             `;
-        cartItems.appendChild(fila);
-    });
+            cartItems.appendChild(fila);
+        });
+    }
 
     actualizarCantidadCarrito();
     actualizarTotal();
-    localStorage.setItem("carrito", JSON.stringify(carrito)); // Guardar cambios en localStorage
+    localStorage.setItem("carrito", JSON.stringify(carrito));
 }
 
 // Agregar producto al carrito
 window.agregarAlCarrito = function (id) {
-    const producto = productos.find(p => p.id === id);
-
-    // Verificamos que haya stock disponible
-    if (producto.stock <= 0) {
+    // Buscar el producto en la base de datos cargada
+    const producto = productosDB.find(p => p.id === id);
+    if (!producto) {
+        showAlert("Producto no encontrado", 'error');
+        return;
+    }
+    // Verificar stock disponible
+    if (producto.stock === 0) {
         showAlert("No hay stock disponible para este helado", 'error');
         return;
     }
-
+    // Reducir stock localmente
     producto.stock--;
-
+    // Buscar si ya existe en el carrito
     const existente = carrito.find(p => p.id === id);
-
     if (existente) {
         existente.cantidad++;
-        showAlert("El helado ya se encuentra en el carrito",'error');
-        return;
+        showAlert("El helado ya se encuentra en el carrito", 'error');
     } else {
         carrito.push({ ...producto, cantidad: 1 });
         showAlert("Producto añadido al carrito", 'success');
@@ -600,7 +633,7 @@ function actualizarCantidadCarrito() {
     cartCount.innerText = totalItems;
 }
 
-// Actualizar cantidad de producto
+// Actualizar cantidad de producto en el carrito
 window.actualizarCantidad = function (index, cantidad) {
     carrito[index].cantidad = parseInt(cantidad) || 0;
     renderizarCarrito();
@@ -647,6 +680,12 @@ function showAlert(message, type) {
     }, 3000);
 }
 // Cargar carrito inicial
-renderizarCarrito();
-*/
+function iniciarApp() {
+    renderizarCarrito();  // Renderizamos el carrito con lo que haya guardado
+    cargarProductos();    // Cargamos los productos desde la base de datos
+}
+
+// Iniciar la aplicación cuando el DOM esté listo
+document.addEventListener("DOMContentLoaded", iniciarApp);
+
 
