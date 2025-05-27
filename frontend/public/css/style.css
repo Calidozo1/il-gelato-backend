@@ -814,6 +814,10 @@ footer {
     background: #fff;
 }
 
+.button-consultar-ventas {
+    display: flex;
+    justify-content: flex-end;
+}
 .form-buscador {
     display: flex;
     align-items: center;
@@ -1207,4 +1211,46 @@ body.modal-abierto {
 .btn-cancelar:hover, .btn-guardar:hover {
     transform: scale(1.05);
     transition: transform 0.3s ease-in-out;
+}
+
+
+.aside-perfil {
+    position: fixed;
+    top: 0;
+    right: -500px; /* Apartado de la vista para estar oculto inicialmente */
+    width: 400px;
+    height: 100%;
+    background: #fff;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+    transition: right 0.3s ease;
+    padding: 20px;
+    overflow-y: auto;
+}
+.aside-perfil.open {
+    right: 0;
+}
+.aside-perfil .close-btn {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: transparent;
+    border: none;
+    font-size: 2rem;
+    cursor: pointer;
+}
+/* Botón para abrir el aside */
+.btn-open-aside {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1100;
+    padding: 10px 20px;
+    font-size: 1rem;
+    cursor: pointer;
+}
+.close-btn{
+    position: absolute;
+    top: 0;
+    left: 0;
 }

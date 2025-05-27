@@ -13,6 +13,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Berkshire+Swash&family=Montserrat:ital@0;1&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
   <script src="/js/script.js" defer></script>
+  <script src="/js/login.js" defer></script>
   <title>Document</title>
 </head>
 
@@ -41,6 +42,7 @@
   <section class="noShow">
 
     <div id="seccionCliente">
+
       <header id="header">
         <div class="contenedor-header">
           <nav class="navigation">
@@ -51,10 +53,22 @@
               </button>
               <span id="cartCount">0</span>
             </div>
-            <button class="account" onclick="window.location.href='/consultarPerfil'">
+            <div class="button-account">
+            <button class="account" onclick="openAside()">
               <span class="material-symbols-outlined account-icon">account_circle</span>
             </button>
             </div>
+            <aside class="aside-perfil" id="asidePerfil">
+              <button class="close-btn" onclick="closeAside()">&times;</button>
+              <h1>Datos del Cliente</h1>
+              <div class="cliente-datos" id="datos-usuario">
+                <p><strong>Nombre:</strong> <span id="nombre"></span></p>
+                <p><strong>Email:</strong> <span id="email"></span></p>
+                <p><strong>Cédula:</strong> <span id="cedula"></span></p>
+                <p><strong>Contraseña:</strong> <span id="password"></span></p>
+                <p><strong>Teléfono:</strong> <span id="phone"></span></p>
+              </div>
+            </aside>
             <aside id="cartAside" class="cart-aside">
               <div class="cart-header">
                 <h2>Carrito de Compras</h2>
@@ -72,6 +86,7 @@
           </nav>
         </div>
       </header>
+
 
       <section class="banner">
         <div class="banner-container">
@@ -116,7 +131,7 @@
       </header>
 
       <main>
-        <div class="consultar-helado-todo">
+        <div id="consultar-helado-todo" class="oculto">
           <div class="consultar-helado">
             <div class="Gradient">
               <span class="titulo-consultar-helado">Consultar Helado</span>
@@ -124,6 +139,10 @@
             </div>
           </div>
           <div class="lista-helados-filtro">
+            <div class="button-consultar-ventas">
+              <button class="login" onclick="window.location.href='/consultar-ventas'">Ir a Consultar Ventas
+                <span class="material-symbols-outlined arrow">arrow_forward</span></button>
+            </div>
             <div class="form-buscador">
               <input type="text" placeholder="Buscar" class="input-buscar" />
               <button type="submit" class="boton-buscar"></button>
@@ -220,7 +239,7 @@
     </div>
   </footer>
 
-  <script>
+
     document.addEventListener("DOMContentLoaded", () => {
       const landingPage = document.querySelector(".landing-page");
       const noShow = document.querySelector(".noShow");
@@ -236,14 +255,14 @@
         seccionAdmin.style.display = "none";
       }
 
-      if (currentPath === "/consultar-ventas") {
+      if (currentPath === "/catalogo") {
         landingPage.style.display = "none";
         noShow.style.display = "block";
         seccionCliente.style.display = "none";
         seccionAdmin.style.display = "block";
       }
     });
-  </script>
+
 </body>
 </html>
 
