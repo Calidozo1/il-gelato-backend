@@ -47,28 +47,15 @@
         <div class="contenedor-header">
           <nav class="navigation">
             <img src="/img/Logo.png" class="icecreamlogo">
+
             <div class="button-cart">
               <button class="button" id="toggleCart">
                 <span class="material-symbols-outlined icon-cart">shopping_cart</span>
               </button>
+
               <span id="cartCount">0</span>
             </div>
-            <div class="button-account">
-            <button class="account" onclick="openAside()">
-              <span class="material-symbols-outlined account-icon">account_circle</span>
-            </button>
-            </div>
-            <aside class="aside-perfil" id="asidePerfil">
-              <button class="close-btn" onclick="closeAside()">&times;</button>
-              <h1>Datos del Cliente</h1>
-              <div class="cliente-datos" id="datos-usuario">
-                <p><strong>Nombre:</strong> <span id="nombre"></span></p>
-                <p><strong>Email:</strong> <span id="email"></span></p>
-                <p><strong>Cédula:</strong> <span id="cedula"></span></p>
-                <p><strong>Contraseña:</strong> <span id="password"></span></p>
-                <p><strong>Teléfono:</strong> <span id="phone"></span></p>
-              </div>
-            </aside>
+
             <aside id="cartAside" class="cart-aside">
               <div class="cart-header">
                 <h2>Carrito de Compras</h2>
@@ -81,6 +68,24 @@
                 <h3>Total: <span id="cartTotal">$0</span></h3>
                 <button id="emptyCart">Vaciar Carrito</button>
                 <!--<button id="finalizarBuy"> Finalizar Compra </button> !-->
+              </div>
+            </aside>
+
+            <div class="button-account">
+              <button class="account" onclick="openAside()">
+                <span class="material-symbols-outlined account-icon">account_circle</span>
+              </button>
+            </div>
+
+            <aside class="aside-perfil" id="asidePerfil">
+              <button class="close-btn" onclick="closeAside()">&times;</button>
+              <h1>Datos del Cliente</h1>
+              <div class="cliente-datos" id="datos-usuario">
+                <p><strong>Nombre:</strong> <span id="nombre"></span></p>
+                <p><strong>Email:</strong> <span id="email"></span></p>
+                <p><strong>Cédula:</strong> <span id="cedula"></span></p>
+                <p><strong>Contraseña:</strong> <span id="password"></span></p>
+                <p><strong>Teléfono:</strong> <span id="phone"></span></p>
               </div>
             </aside>
           </nav>

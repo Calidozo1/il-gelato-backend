@@ -716,6 +716,42 @@ function iniciarApp() {
     cargarProductos();    // Cargamos los productos desde la base de datos
 }
 
+function openAside() {
+    document.getElementById('asidePerfil').classList.add('open');
+    // Llamamos a cargar perfil solo cuando se abre el aside
+    loadPerfil();
+}
+function closeAside() {
+    document.getElementById('asidePerfil').classList.remove('open');
+}
+async function loadPerfil() {
+    const email = localStorage.getItem("email");
+    if (!email) {
+        alert("No se encontró la información del usuario. Por favor inicia sesión.");
+        window.location.href = "/login";
+        return;
+    }
+
+    try {
+        // Se consulta el endpoint que retorna los datos del usuario
+        const res = await fetch(`/api/usuarios/perfil/${encodeURIComponent(email)}`);
+        if (!res.ok) throw new Error("Error al consultar perfil");
+
+        const data = await res.json();
+
+        // Asignamos los datos obtenidos a los elementos del aside
+        document.getElementById("nombre").textContent = data.nombre;
+        document.getElementById("email").textContent = data.email;
+        document.getElementById("cedula").textContent = data.cedula;
+        document.getElementById("password").textContent = data.password;
+        document.getElementById("phone").textContent = data.phone;
+
+    } catch (err) {
+        console.error(err);
+        alert("Error al cargar los datos del perfil");
+    }
+}
+
 // Iniciar la aplicación cuando el DOM esté listo
 document.addEventListener("DOMContentLoaded", iniciarApp);
 
