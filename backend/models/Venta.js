@@ -1,9 +1,10 @@
 class Venta {
-    constructor(cliente, nOrden,fecha,hora) {
+    constructor(cliente, nOrden,fecha,hora,pedido) {
         this.cliente = cliente;
         this.nOrden = nOrden;
         this.fecha = fecha;
         this.hora = hora;
+        this.pedido = pedido;
     }
 }
 
