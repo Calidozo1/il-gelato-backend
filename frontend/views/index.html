@@ -51,10 +51,9 @@
               </button>
               <span id="cartCount">0</span>
             </div>
-            <div class="button-account">
-              <button class="account">
-                <span class="material-symbols-outlined account-icon">account_circle</span>
-              </button>
+            <button class="account" onclick="window.location.href='/consultarPerfil'">
+              <span class="material-symbols-outlined account-icon">account_circle</span>
+            </button>
             </div>
             <aside id="cartAside" class="cart-aside">
               <div class="cart-header">
@@ -221,21 +220,30 @@
     </div>
   </footer>
 
-  <!--<script>
+  <script>
     document.addEventListener("DOMContentLoaded", () => {
       const landingPage = document.querySelector(".landing-page");
       const noShow = document.querySelector(".noShow");
+      const seccionCliente = document.getElementById("seccionCliente");
+      const seccionAdmin = document.getElementById("seccionAdmin");
 
-      // Si la bandera está activa, se asume que el usuario ya inició sesión
-      if (localStorage.getItem("isLoggedIn") === "true") {
+      const currentPath = window.location.pathname;
+
+      if (currentPath === "/catalogo") {
         landingPage.style.display = "none";
         noShow.style.display = "block";
-      } else {
-        landingPage.style.display = "block";
-        noShow.style.display = "none";
+        seccionCliente.style.display = "block";
+        seccionAdmin.style.display = "none";
       }
-    })
-  </script>!-->
+
+      if (currentPath === "/consultar-ventas") {
+        landingPage.style.display = "none";
+        noShow.style.display = "block";
+        seccionCliente.style.display = "none";
+        seccionAdmin.style.display = "block";
+      }
+    });
+  </script>
 </body>
 </html>
 

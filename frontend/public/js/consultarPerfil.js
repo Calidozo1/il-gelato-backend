@@ -23,4 +23,5 @@ document.addEventListener('DOMContentLoaded', async () => {
         console.error(err);
         alert("Error al cargar los datos del perfil");
     }
+
 });

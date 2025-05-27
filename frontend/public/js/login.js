@@ -26,7 +26,7 @@ document.querySelector('.login-button').addEventListener('click', async () => {
             if (data.perfil.esAdmin) {
                 window.location.href = '/consultar-ventas';
             } else {
-                window.location.href = '/consultarPerfil';
+                window.location.href = '/catalogo';
             }
         } else {
             alert("Error: " + data.mensaje);

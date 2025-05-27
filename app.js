@@ -37,6 +37,11 @@ app.get("/consultarPerfil", (req, res) => {
     res.sendFile(path.join(__dirname, "frontend", "views", "consultarPerfil.html"));
 });
 
+// Ruta para ver catalogo
+app.get('/catalogo', (req, res) => {
+    res.sendFile(path.join(__dirname, "frontend", "views", "index.html"));
+})
+
 // Usar rutas del backend
 app.use("/api/productos", productoRoutes);
 app.use("/api/ventas", ventaRoutes);
