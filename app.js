@@ -1,6 +1,6 @@
 const express = require("express");
 const path = require("path");
-const productoRoutes = require("./backend/routes/productoRoutes");
+const productoRoutes = require("./backend/routes/productos");
 const ventaRoutes = require("./backend/routes/ventaRoutes");
 
 const app = express();

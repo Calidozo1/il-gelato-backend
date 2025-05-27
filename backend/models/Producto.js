@@ -19,7 +19,7 @@ class Producto {
 
     static agregar(producto, callback) {
         connection.query(
-            "INSERT INTO productos (nombre, descripcion, precio, stock, imagen) VALUES (?, ?, ?, ?, ?, ?)",
+            "INSERT INTO productos (nombre, descripcion, precio, stock, imagen) VALUES (?, ?, ?, ?, ?)",
             [producto.nombre, producto.descripcion, producto.precio, producto.stock, producto.imagen],
             (err, resultado) => {
                 if (err) return callback(err, null);
@@ -37,3 +37,4 @@ class Producto {
 }
 
 module.exports = Producto;
+
