@@ -17,29 +17,7 @@
 </head>
 
 <body>
-
-  <section class="landing-page">
-  <header class="header-landing-page">
-    <nav class="navigation-landing-page">
-      <img src="/img/Logo.png" class="landing-page-logo">
-      <div class="button-cont">
-        <button class="sign-up" onclick="window.location.href='/signup'">Registrarse</button>
-        <button class="login" onclick="window.location.href='/login'">Iniciar sesion<span class="material-symbols-outlined arrow">
-          arrow_forward</span>
-        </button>
-      </div>
-    </nav>
-  </header>
-
-  <main>
-    <div class="landing-page-container">
-      <img src="/img/Section.png">
-    </div>
-  </main>
-</section>
-
   <section class="noShow">
-
     <div id="seccionCliente">
       <header id="header">
         <div class="contenedor-header">
@@ -100,152 +78,12 @@
         </div>
       </main>
     </div>
-
-    <div id="seccionAdmin">
-
-      <header id="header2">
-        <div class="contenedor-header">
-          <nav class="navigation">
-            <img src="/img/Logo.png" class="icecreamlogo">
-            <div class="button-account">
-              <button class="account">
-                <span class="material-symbols-outlined account-icon">account_circle</span>
-              </button>
-            </div>
-          </nav>
-        </div>
-      </header>
-
-      <main>
-        <div class="consultar-helado-todo">
-          <div class="consultar-helado">
-            <div class="Gradient">
-              <span class="titulo-consultar-helado">Consultar Helado</span>
-              <div class="bienvenido-boton"><span class="Bienvenido">Bienvenido</span></div>
-            </div>
-          </div>
-          <div class="lista-helados-filtro">
-            <div class="boton-consult-sales"><button class="login" onclick="window.location.href='/consultar-ventas'">Ir a Consultar Ventas<span class="material-symbols-outlined arrow">
-              arrow_forward</span>
-            </button></div>
-            <div class="form-buscador">
-              <input type="text" placeholder="Buscar" class="input-buscar" />
-              <button type="submit" class="boton-buscar"></button>
-            </div>
-            <div class="tabla-consultar">
-              <div class="cabecera-tabla">
-                <div class="textos-cabecera">
-                  <div class="lista-de-helados">Lista de helados</div>
-                  <div class="texto-todas">Todas</div>
-                </div>
-                <div class="boton-nuevo-helado">
-                  <div class="nuevo-helado">
-                  </div>
-                </div>
-              </div>
-              <div class="fila-titulos">
-                <div class="ID">ID</div>
-                <div class="nombre">Nombre</div>
-                <div class="precio">Precio</div>
-                <div class="info">Info</div>
-              </div>
-              <div class="linea-contenedor"></div>
-              <div id="contenedor-filas"></div>
-            </div>
-            <!-- Contenedor de flechas de paginación -->
-            <div class="botones-navegacion">
-              <div id="anterior" class="flecha flecha-anterior"></div>
-              <span id="pagina-actual">1</span>
-              <div id="siguiente" class="flecha flecha-siguiente"></div>
-            </div>
-          </div>
-          <!-- Popup modal para información extra del helado -->
-          <div id="modal-overlay" class="modal-overlay">
-            <div class="info-extra-helado">
-              <div class="contenido-popup">
-                <div id="helado-nombre"></div>
-                <div class="fila-detalle">
-                  <div class="icono icono-stock"></div>
-                  <span id="helado-stock" class="valor-detalle"></span>
-                </div>
-                <div class="fila-detalle">
-                  <div class="icono icono-id"></div>
-                  <span id="helado-id" class="valor-detalle"></span>
-                </div>
-                <div class="fila-detalle">
-                  <div class="icono icono-precio"></div>
-                  <span id="helado-precio" class="valor-detalle"></span>
-                </div>
-                <div id="helado-descripcion-actual">Descripción</div>
-                <div id="helado-descripcion"></div>
-              </div>
-              <div class="cerrar-popup"></div>
-            </div>
-          </div>
-        </div>
-        <div id="agregar-helado" class="oculto">
-          <div class="Gradient">
-            <span class="titulo-agregar-helado">Agregar Helado</span>
-            <div class="bienvenido-boton"><span class="Bienvenido">Bienvenido</span></div>
-          </div>
-          <div class="agregar-nuevo-helado">
-            <div class="titulo2-agregar-helado"></div>
-            <div class="contenedor-campos">
-              <div class="llenar-3">
-                <div class="texto-campo">Nombre</div>
-                <input type="text" class="boton-llenar" id="boton-llenar-nombre" placeholder="Nombre del helado">
-                <div class="texto-campo">Precio</div>
-                <input type="text" class="boton-llenar" id="boton-llenar-precio" placeholder="Precio">
-                <div class="texto-campo">Cantidad</div>
-                <input type="number" class="boton-llenar" id="boton-llenar-stock" placeholder="Stock" min="0">
-                <div class="texto-campo">Imagen</div>
-                <input type="file" class="boton-llenar" id="boton-llenar-imagen" accept="image/*">
-                <div id="preview-imagen" style="width: 100px; height: 100px; margin-top: 10px; border: 1px solid #ccc;"></div>
-                <div class="texto-campo">Descripción</div>
-                <textarea class="boton-llenar-descripcion" id="boton-llenar-descripcion" placeholder="Descripción"></textarea>
-                <div class="contenedor-botones">
-                  <div class="btn-cancelar"></div>
-                  <div class="btn-guardar"></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>>
-      </main>
-    </div>
-
   </section>
-
   <footer>
     <div class="footer">
       <img src="/img/footer.png">
     </div>
   </footer>
-
-  <!--<script>
-    document.addEventListener("DOMContentLoaded", () => {
-      const landingPage = document.querySelector(".landing-page");
-      const noShow = document.querySelector(".noShow");
-      const cliente = document.getElementById("seccionCliente");
-      const admin = document.getElementById("seccionAdmin");
-
-      // Si la bandera está activa, se asume que el usuario ya inició sesión
-      if (localStorage.getItem("isLoggedIn&isAdmin") === "true") {
-        landingPage.style.display = "none";
-        noShow.style.display = "block";
-        admin.style.display = "block";
-
-      } if (localStorage.getItem("isLoggedIn") === "true"){
-        landingPage.style.display = "none";
-        noShow.style.display = "block";
-        cliente.style.display = "block";
-      }
-      else {
-        landingPage.style.display = "block";
-        noShow.style.display = "none";
-      }
-    })
-  </script> !-->
 </body>
 </html>
 
