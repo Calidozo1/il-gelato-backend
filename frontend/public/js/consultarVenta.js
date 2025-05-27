@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (ventas.length === 0) {
             const fila = document.createElement("tr");
             const celda = document.createElement("td");
-            celda.colSpan = 7;
+            celda.colSpan = 4;
             celda.textContent = "No hay resultados";
             fila.appendChild(celda);
             tbody.appendChild(fila);
@@ -47,28 +47,17 @@ document.addEventListener("DOMContentLoaded", () => {
             const nOrden = document.createElement("td");
             nOrden.textContent = venta.nOrden;
 
-            const pedido = document.createElement("td");
-            pedido.textContent = venta.pedido;
-
-            const precio = document.createElement("td");
-            precio.textContent = venta.precio.toFixed(2);
-
             const fecha = document.createElement("td");
             fecha.textContent = venta.fecha;
 
             const hora = document.createElement("td");
             hora.textContent = venta.hora;
 
-            const estado = document.createElement("td");
-            estado.textContent = venta.estado;
 
             fila.appendChild(cliente);
             fila.appendChild(nOrden);
-            fila.appendChild(pedido);
-            fila.appendChild(precio);
             fila.appendChild(fecha);
             fila.appendChild(hora);
-            fila.appendChild(estado);
 
             tbody.appendChild(fila);
         });
