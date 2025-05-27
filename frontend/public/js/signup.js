@@ -23,7 +23,7 @@ document.getElementById('signupForm').addEventListener('submit', async (e) => {
         const data = await res.json();
         if (res.ok) {
             alert("Registro exitoso");
-            window.location.href = '/fronted/views/login.html'; // o redirige a login
+            window.location.href = '/'; // o redirige a login
         } else {
             alert("Error: " + data.mensaje);
         }
