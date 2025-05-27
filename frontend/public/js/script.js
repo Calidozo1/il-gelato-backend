@@ -1,11 +1,31 @@
-const productos = [
-    { id: 1, nombre: "Helado De Chocolate con Sirope", precio: 5, stock: 30, imagen: "/img/chocolate con sirope.png", descripcion: "El chocolate más fino se transforma en un gelato seductor, lleno de matices y con un toque de indulgencia irresistible." },
-    { id: 2, nombre: "Helado De Chocolate", precio: 4.5,stock: 35, imagen: "/img/chocolate.png",descripcion: "Un toque de limón siciliano confiere frescura y energía, convirtiendo cada bocado en una explosión cítrica y revitalizante." },
-    { id: 3, nombre: "Helado De Fresa", precio: 4, stock: 25, imagen: "/img/fresa.png", descripcion: "La vainilla de Madagascar eleva este gelato a un clásico sublime, suave y aromático, ideal para cualquier ocasión." },
-    {id: 4, nombre: "Helado De Menta", precio: 6, stock: 15, imagen: "/img/menta.png", descripcion: "Fresas frescas y jugosas se mezclan en un gelato vibrante, perfecto para deleitar los sentidos y refrescar el paladar." },
-    {id: 5, nombre: "Helado De Vainilla", precio: 7, stock: 20, imagen: "/img/vainilla.png", descripcion: "Un exquisito pistacho italiano se fusiona con la cremosidad del gelato, creando una experiencia de sabor elegante y sofisticada."},
-    {id: 6, nombre: "Helado De Dulce de Leche",precio: 8, stock:  18, imagen: "/img/dulce de leche.png", descripcion: "El chocolate más fino se transforma en un gelato seductor, lleno de matices y con un toque de indulgencia irresistible." },
-];
+// Cargar productos desde la API
+async function cargarProductos() {
+    try {
+        const respuesta = await fetch("http://localhost:3000/productos"); // Llamada a la API
+        const productos = await respuesta.json();
+
+        mostrarProductos(productos); // Llamamos a la función que los muestra en el HTML
+    } catch (error) {
+        console.error("Error al obtener los productos:", error);
+    }
+}
+
+function mostrarProductos(productos) {
+    listaProductos.innerHTML = ""; // Limpiamos la lista
+
+    productos.forEach(producto => {
+        const productoHTML = `
+            <div class="producto">
+                <img src="${producto.imagen}" alt="${producto.nombre}">
+                <h3>${producto.nombre}</h3>
+                <p>${producto.descripcion}</p>
+                <span>Precio: $${producto.precio}</span>
+                <button onclick="agregarAlCarrito(${producto.id})">Agregar al carrito</button>
+            </div>
+        `;
+        listaProductos.innerHTML += productoHTML;
+    });
+}
 
 let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
 const listaProductos = document.getElementById("listaProductos");
@@ -52,6 +72,32 @@ document.addEventListener('DOMContentLoaded', function() {
     renderizarHelados();
     actualizarPaginaActual();
     asignarEventosPopup();
+});
+
+agregarHelado.addEventListener("submit", async (event) => {
+    event.preventDefault(); // Evitar recargar la página
+
+    const nombre = document.getElementById("nombre").value;
+    const descripcion = document.getElementById("descripcion").value;
+    const precio = document.getElementById("precio").value;
+    const stock = document.getElementById("stock").value;
+    const imagen = document.getElementById("imagen").value;
+    const categoria = document.getElementById("categoria").value;
+
+    try {
+        const respuesta = await fetch("http://localhost:3000/productos", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ nombre, descripcion, precio, stock, imagen, categoria })
+        });
+
+        if (respuesta.ok) {
+            alert("Producto agregado correctamente");
+            cargarProductos(); // Recargar lista después de agregar
+        }
+    } catch (error) {
+        console.error("Error al agregar el producto:", error);
+    }
 });
 
 // Variables de paginación

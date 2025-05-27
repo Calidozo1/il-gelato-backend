@@ -1,19 +1,39 @@
+const connection = require("../config/db");
+
 class Producto {
-    constructor(id, nombre, descripcion, precio, stock, imagen, categoria) {
+    constructor(id, nombre, descripcion, precio, stock, imagen) {
         this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.precio = precio;
         this.stock = stock;
         this.imagen = imagen;
-        this.categoria = categoria;
+    }
+
+    static obtenerTodos(callback) {
+        connection.query("SELECT * FROM productos", (err, resultados) => {
+            if (err) return callback(err, null);
+            callback(null, resultados);
+        });
+    }
+
+    static agregar(producto, callback) {
+        connection.query(
+            "INSERT INTO productos (nombre, descripcion, precio, stock, imagen) VALUES (?, ?, ?, ?, ?, ?)",
+            [producto.nombre, producto.descripcion, producto.precio, producto.stock, producto.imagen],
+            (err, resultado) => {
+                if (err) return callback(err, null);
+                callback(null, resultado.insertId);
+            }
+        );
+    }
+
+    static eliminarPorId(id, callback) {
+        connection.query("DELETE FROM productos WHERE id = ?", [id], (err, resultado) => {
+            if (err) return callback(err, null);
+            callback(null, resultado.affectedRows > 0);
+        });
     }
 }
 
-// Base de datos en memoria (Array)
-const productos = [
-    new Producto(1, "Helado De Vainilla", "Suave y delicioso", 5.99, 20, "/frontend/plublic/img/icecream.png", "Helados"),
-    new Producto(2, "Helado De Chocolate", "Postre italiano con café", 7.99, 15, "/frontend/plublic/img/icecream.png", "Postres"),
-];
-
-module.exports = { Producto, productos };
+module.exports = Producto;
