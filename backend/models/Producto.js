@@ -10,30 +10,36 @@ class Producto {
         this.imagen = imagen;
     }
 
-    static obtenerTodos(callback) {
-        connection.query("SELECT * FROM productos", (err, resultados) => {
-            if (err) return callback(err, null);
-            callback(null, resultados);
-        });
+    static async obtenerTodos() {
+        try {
+            const [resultados] = await connection.query("SELECT * FROM productos");
+            return resultados;
+        } catch (error) {
+            throw error;
+        }
     }
 
-    static agregar(producto, callback) {
-        connection.query(
-            "INSERT INTO productos (nombre, descripcion, precio, stock, imagen) VALUES (?, ?, ?, ?, ?)",
-            [producto.nombre, producto.descripcion, producto.precio, producto.stock, producto.imagen],
-            (err, resultado) => {
-                if (err) return callback(err, null);
-                callback(null, resultado.insertId);
-            }
-        );
+    static async agregar(producto) {
+        try {
+            const [resultado] = await connection.query(
+                "INSERT INTO productos (nombre, descripcion, precio, stock, imagen) VALUES (?, ?, ?, ?, ?)",
+                [producto.nombre, producto.descripcion, producto.precio, producto.stock, producto.imagen]
+            );
+            return resultado.insertId;
+        } catch (error) {
+            throw error;
+        }
     }
 
-    static eliminarPorId(id, callback) {
-        connection.query("DELETE FROM productos WHERE id = ?", [id], (err, resultado) => {
-            if (err) return callback(err, null);
-            callback(null, resultado.affectedRows > 0);
-        });
+    static async eliminarPorId(id) {
+        try {
+            const [resultado] = await connection.query("DELETE FROM productos WHERE id = ?", [id]);
+            return resultado.affectedRows > 0;
+        } catch (error) {
+            throw error;
+        }
     }
 }
 
 module.exports = Producto;
+
