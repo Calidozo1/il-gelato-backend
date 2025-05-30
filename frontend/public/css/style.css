@@ -125,26 +125,13 @@ body {
 /*============================================================================
   5. Landing Page Container & Estado
 ============================================================================*/
-/* La clase .landing-page se usa en dos momentos, por eso se agrupa aquí.
-   Nota: Se establece display: none; (oculto) y se podrá cambiar mediante JS */
+
 .landing-page {
     width: 100%;
     display: block ;
     flex-direction: column;
 }
 
-.noShow{
-    display: none;
-}
-
-#seccionCliente{
-    display: none;
-}
-
-#seccionAdmin {
-    display: none;
-    width: 100%;
-}
 /*============================================================================
   6. Banner Global (Catálogo)
 ============================================================================*/
@@ -462,6 +449,35 @@ img {
     align-items: center;
     justify-content: center;
 }
+
+
+.modal {
+    display: none; /* Oculto por defecto */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Oscurecer fondo */
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background: white;
+    padding: 20px;
+    width: 300px;
+    text-align: center;
+    border-radius: 8px;
+}
+
+.close-btn {
+    font-size: 24px;
+    cursor: pointer;
+    color: red;
+}
+
+
 
 /*============================================================================
   15. Botones e Iconos Generales

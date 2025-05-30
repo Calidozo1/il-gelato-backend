@@ -53,15 +53,21 @@ app.get("/consultarPerfil", (req, res) => {
 });
 
 // Ruta para ver catalogo
-app.get('/catalogo', (req, res) => {
-    res.sendFile(path.join(__dirname, "frontend", "views", "index.html"));
-})
+app.get("/catalogo", (req, res) => {
+    res.sendFile(path.join(__dirname, "frontend", "views", "catalogo.html"));
+});
+
+//Ruta para ver heladosAdmin
+app.get("/helados", (req, res) => {
+    res.sendFile(path.join(__dirname, "frontend", "views", "helados.html"));
+});
+
 
 // Usar rutas del backend
 app.use("/api/ventas", ventaRoutes);
 app.use("/api/usuarios", usuariosRoutes);
 
-// Página principal
+// servir registrar ventas
 app.get('/registrar-ventas', function (req, res) {
     res.render(path.join(__dirname, "frontend", "views", "registrarventas.ejs"));
 });
@@ -99,9 +105,6 @@ app.post('/guardardatos', async (req, res) => {
         res.status(500).render(path.join(__dirname, "frontend", "views", "registrarventas.ejs"),{error:error});
     }
 });
-
-
-
 
 
 const PORT = 3000;
